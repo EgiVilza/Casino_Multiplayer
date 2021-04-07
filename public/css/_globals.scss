@@ -1,0 +1,16 @@
+body {
+  //Green Background Image
+  background-image: url("../Images/background.jpg");
+  
+  //Dimensions
+  width: 100%; 
+  height: 100%;
+
+  background-position: center;
+  background-size: cover;
+}
+
+//Class for make some of the tabe text/buttons disappear when starting the game
+.displayNone {
+  display: none;
+}
