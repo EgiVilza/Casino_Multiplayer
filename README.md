@@ -42,7 +42,7 @@ NA
 
 ## Usage
 
-The repo is for a group coding project.
+This repo is for a group coding project.
 
 ## Tests
 
