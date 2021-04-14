@@ -4,11 +4,23 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const playerSchema = new Schema({
-  name: { 
-    type: String, 
-    required: true 
+  username: {
+    type: String,
+    required: true,
+    trim: true,
+    unique: [true, "Username already taken"]
   },
-  author: { 
+  email: {
+    type: String,
+    required: true,
+    unique: true,
+    match: [/.+@.+\..+/, "Please enter a valid e-mail address"]
+  },
+  password: {
+    type: String,
+    required: [true, "Please enter a password"]
+  },
+  balance: { 
     type: Number, 
     required: true 
   }

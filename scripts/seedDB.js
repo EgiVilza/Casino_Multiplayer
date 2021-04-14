@@ -10,19 +10,27 @@ mongoose.connect(
 
 const playerSeed = [
   {
-    name: "Ken", 
+    username: "Ken", 
+    email: "ken@email.com",
+    password: 123,
     balance: 5000
   },
   {
-    name: "Pam", 
+    username: "Pam",
+    email: "pam@email.com",
+    password: 124,
     balance: 900
   },
   {
-    name: "Pat", 
+    username: "Pat",
+    email: "pat@email.com",
+    password: 125,
     balance: 6000
   },
   {
-    name: "Ren", 
+    username: "Ren",
+    email: "ren@email.com",
+    password: 126,
     balance: 1000
   },
 ];
