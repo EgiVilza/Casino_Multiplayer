@@ -1,0 +1,73 @@
+#gameBoardContainer .cards {
+    width: 90px;
+    height: 120px;
+  }
+
+#gameBoardContainer .betAmountDiv {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+  
+#gameBoardContainer #betAmount {
+    border-radius: 50%;
+    width: 170px;
+    height: 170px;
+    padding: 10px;
+    background: #fff;
+    border: 2px solid #666;
+    color: #666;
+    text-align: center;
+    font-family: 'Federant', cursive;
+    font-size: 40px;
+  }
+  
+#gameBoardContainer .tableTitle {
+    color: #e65681;
+    font-size: 35px;
+    width: 600px;
+    text-align: center;
+  }
+  
+#gameBoardContainer .tableText {
+    border-style: solid;
+    border-color: yellow;
+    color: white;
+    text-align: center;
+    font-size: 35px;
+  }
+  
+#gameBoardContainer .playersHandText {
+    color: #e65681;
+    font-size: 35px;
+    width: 600px;
+    text-align: center;
+  }
+  
+#gameBoardContainer .dealersHandText {
+    color: #e65681;
+    font-size: 35px;
+    width: 600px;
+    text-align: center;
+  }
+  
+#gameBoardContainer #amountLeft {
+    pointer-events: none;
+  }
+  
+  /* PAY aTTENTION TO THIS AMIGO - DIDN'T SET IT UP WITH #gameBoardContainer */
+body {
+    background-image: url("../../Images/background.jpg");
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    background-size: cover;
+  }
+  
+  /* took out all of the mediaquery stuff */

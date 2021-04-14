@@ -1,0 +1,14 @@
+#leaderBoardContainer .tableText {
+    border-style: solid;
+    border-color: yellow;
+    color: white;
+    text-align: center;
+    font-size: 35px;
+  }
+  
+#leaderBoardContainer .tableTitle {
+    color: #e65681;
+    font-size: 35px;
+    width: 600px;
+    text-align: center;
+  }
