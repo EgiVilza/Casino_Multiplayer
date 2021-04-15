@@ -19,7 +19,7 @@ const Navbar = () => {
   return (
     <Nav>
       <div className="logo">
-        Nav Bar
+        Main page button here.
       </div>
       <Burger />
     </Nav>
