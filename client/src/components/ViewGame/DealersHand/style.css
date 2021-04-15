@@ -1,0 +1,8 @@
+#dealerWrapper {
+    display: grid;
+    text-align: center; 
+    margin: 1em;
+    padding: 3em;
+    background-color: white;
+    border-style: solid;
+}

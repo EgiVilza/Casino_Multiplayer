@@ -1,9 +1,11 @@
 import React from "react"
-import NavBar from "./components/NavBar"
-import HomePage from "./pages/Homepage"
+import "./app.css"
+import CreateServer from "./pages/CreateServerPage"
+import ViewGame from "./pages/ViewGamePage"
 import LeaderBoard from "./pages/LeaderBoardPage"
-import GamePage from "./pages/GamePage"
-import Signup from "./pages/SignupPage"
+import GameBoardPage from "./pages/GameBoardPage"
+import NavBar from "./components/NavBar"
+
 import { HashRouter as Router, Route } from "react-router-dom";
 
 function App() {
@@ -11,10 +13,11 @@ function App() {
         <Router>
             <div>
                 <NavBar />
-                    <Route exact path="/" component={HomePage} />
-                    <Route exact path="/signup" component={Signup} />
+                {/* original "/" route use for sign up and login page */}
+                    <Route export path="/server" component={CreateServer} />
+                    <Route exact path="/game" component={GameBoardPage} />
+                    <Route export path="/viewgame" component={ViewGame} />
                     <Route exact path="/leaderboard" component={LeaderBoard} />
-                    <Route export path="/gamepage" component={GamePage} />
             </div>
         </Router>
     )
