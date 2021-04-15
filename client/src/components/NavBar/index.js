@@ -1,34 +1,29 @@
-import React from "react"
-import "./style.css"
-import { Link } from "react-router-dom"
+import React from 'react';
+import styled from 'styled-components';
+import Burger from './Burger';
 
-function NavBar() {
-    return(
-        <div id="navBarContainer">
-            <nav className="navBar">
-                <ul className="nav">
-                    <li className="nav-item" id="homePageLink">
-                        <Link 
-                            to="/"
-                            className="nav-link active homeTitle" 
-                            aria-current="page" 
-                        >   
-                         Black Jack Casino
-                        </Link>
-                    </li>
-                    <li className="nav-item" id="scoreBoardLink">
-                        <Link 
-                            to="/leaderboard"
-                            className="nav-link scoreboardTitle" 
-                            aria-current="page" 
-                        >   
-                         LeaderBoard
-                        </Link>
-                    </li>
-                </ul>
-            </nav>
-        </div>
-    )
+const Nav = styled.nav`
+  background-color: white;
+  width: 100%;
+  height: 55px;
+  border-bottom: 2px solid #f1f1f1;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  .logo {
+    padding: 15px 0;
+  }
+`
+
+const Navbar = () => {
+  return (
+    <Nav>
+      <div className="logo">
+        Nav Bar
+      </div>
+      <Burger />
+    </Nav>
+  )
 }
 
-export default NavBar
+export default Navbar

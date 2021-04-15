@@ -1,14 +1,13 @@
-#leaderBoardContainer .tableText {
-    border-style: solid;
-    border-color: yellow;
-    color: white;
-    text-align: center;
-    font-size: 35px;
-  }
-  
-#leaderBoardContainer .tableTitle {
-    color: #e65681;
-    font-size: 35px;
-    width: 600px;
-    text-align: center;
-  }
+.leaderWrapper {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-style:solid;
+    margin: 5em;
+    background-color: white;
+}
+
+.leaderWrapper > div {
+    display: grid;
+    /* border-style: solid; */
+    padding: 1em
+}

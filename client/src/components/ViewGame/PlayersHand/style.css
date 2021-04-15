@@ -1,0 +1,33 @@
+.playersHand {
+    display: grid;
+    grid-template-columns:repeat(1, 2fr);
+    gap: 5em;
+    margin-top:50px;
+    column-gap: 5em;
+}
+
+.playersHand > div {
+    background: #eee;
+}
+
+.firstPlayersColumn {
+    display: grid;
+    grid-template-columns:repeat(2, 1fr);
+}
+
+.firstPlayersColumn > div {
+    border-style: solid;
+    padding: 3em;
+    text-align: center;
+}
+
+.secondPlayersColumn {
+    display: grid;
+    grid-template-columns:repeat(2, 1fr);
+}
+
+.secondPlayersColumn > div {
+    border-style: solid;
+    padding: 3em;
+    text-align: center;
+}

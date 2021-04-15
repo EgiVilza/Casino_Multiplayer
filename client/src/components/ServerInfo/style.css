@@ -1,0 +1,14 @@
+.serverWrapper {
+    display:grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-gap: 1em;
+    grid-auto-rows: minmax(50px, auto);
+    margin: 1em;
+    text-align: left;
+}
+
+.serverWrapper > div {
+    border-style: solid;
+    border-color: black;
+    padding: 1em
+}
