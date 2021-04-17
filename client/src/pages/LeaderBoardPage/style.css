@@ -2,7 +2,7 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     border-style:solid;
-    margin: 5em;
+    margin: 4em;
     background-color: white;
 }
 

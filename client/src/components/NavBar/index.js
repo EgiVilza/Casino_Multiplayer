@@ -1,6 +1,10 @@
-import React from 'react';
+/* eslint-disable no-unused-vars */
 import styled from 'styled-components';
 import Burger from './Burger';
+// import NavContext from "../../utils/NavContext"
+// import React, { useState, useEffect } from "react";
+import React from "react"
+import {useAppContext} from "../../utils/AppContext"
 
 const Nav = styled.nav`
   background-color: white;
@@ -15,12 +19,19 @@ const Nav = styled.nav`
   }
 `
 
-const Navbar = () => {
+function Navbar() {
+
+  // pulling the state from useAppContext
+  const [ state, _ ] = useAppContext()
+
   return (
     <Nav>
       <div className="logo">
         Main page button here.
       </div>
+
+      {/* put the state.title here */}
+      <h1>{state.title} </h1>
       <Burger />
     </Nav>
   )

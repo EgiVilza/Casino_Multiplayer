@@ -1,24 +1,24 @@
-// build it all on here first, then break down into components and render them in this file
-// new navbar with a hamburger menu
-// use props in the navbar to change heading! - Make general page of this first
-// set up route to render this page
-
-// we want one big box
-// inside that box we want 4 rows
-// first row is just a create server button
-// next three are rows for the server info
-
-import React from "react"
+import React, { useEffect } from "react"
 import "./style.css"
 import CreateServerBtn from "../../components/CreateServerBtn"
 import ServerInfo from "../../components/ServerInfo"
+import { useAppContext } from "../../utils/AppContext"
 
 function ChooseServer() {
+    const [ state, dispatch ] = useAppContext()
+
+    // setting the original title to Leader Board
+    useEffect(() => {
+        dispatch({
+            type: "changeTitle",
+            title: "Create Server"
+        })
+    }, [] )
+
     return(
         <div id="chooseServer">
-            {/* make this own component */}
-            <CreateServerBtn />
             <ServerInfo />
+            <CreateServerBtn />
         </div>
     )
 }

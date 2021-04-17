@@ -1,18 +1,23 @@
-import React from "react"
+import React, { useEffect } from "react"
+import Login from "../../components/Login"
 import "./style.css"
-import {Container, Row, Col} from "../../components/Grid/index"
+import { useAppContext } from "../../utils/AppContext"
 
-function Login() {
-    return (  
-        <div>
-            <Container>
-                <Row>
-                    <Col size="md-12"></Col>
-                    <Col size="md-12"></Col>
-                </Row>
-            </Container>
+const LoginPage = () => {
+    const [ state, dispatch ] = useAppContext()
+
+    useEffect(() => {
+        dispatch({
+            type: "changeTitle",
+            title: "Login"
+        })
+    }, [] )
+
+    return (
+        <div className="loginPage">
+            <Login />
         </div>
     )
 }
 
-export default Login
+export default LoginPage
