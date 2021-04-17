@@ -1,21 +1,45 @@
 import React from "react"
 import "./style.css"
+import Button from "../Button"
+
+function handleClick(e) {
+    e.preventDefault();
+    console.log('The link was clicked.');
+  }
 
 function GameBoard() {
     return(
         <div className="gbWrapper">
-          {/* change to use props and make separate components for each part */}
             <div className="firstCol">
+                
                 <div className="amount">Amount Left: $5,000</div>
-                <button className="placeBet">Place Bet</button>
+                <Button className="placeBet"
+                        onClick={handleClick}>
+                        Place Bet
+                </Button>
 
                 <div className="innerDiv">
-                    <button className="hit">Ht</button>
-                    <button className="stay">Stay</button>
+                    <Button className="hit"
+                        onClick={handleClick}>
+                        Ht
+                    </Button>
+
+                    <Button className="stay"
+                        onClick={handleClick}>
+                        Stay
+                    </Button>
                 </div>
 
-                <button className="split">Split</button>
-                <button className="subScore">Submit Score</button>
+                <Button className="split"
+                    onClick={handleClick}>
+                    Split
+                </Button>
+
+                <Button className="subScore"
+                    onClick={handleClick}>
+                    Submit Score
+                </Button>
+
             </div>
 
             <div className="secCol">
@@ -23,6 +47,7 @@ function GameBoard() {
                 <div className="handOfPlayer">Player's Hand: </div>
             </div>
 
+        {/* MAKE A GAME RULES COMPONENT HERE?  */}
         </div>
     )
 }

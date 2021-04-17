@@ -1,4 +1,4 @@
-.signupWrapper {
+.loginWrapper {
     display:grid;
     grid-template-columns: repeat(1, 1fr);
     grid-gap: 1em;
@@ -8,22 +8,22 @@
     background-color: white;
 }
 
-.signupWrapper > input {
+.loginWrapper > input {
     border-style: solid;
     border-color: black;
     padding: 1em
 }
 
-.signupWrapper > h1 {
+.loginWrapper > h1 {
     text-align: center;
 }
 
-.signUpInfo {
-   display: grid;
+.loginInfo {
+    display: grid;
    grid-template-columns: repeat(2, 1fr)
 }
 
-.loginHere {
+.signUpHere {
     margin-top: 1em;
     text-align: right;
 }

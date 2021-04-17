@@ -70,6 +70,26 @@ const RightNav = ({ open }) => {
               Leader Board
              </Link>
         </li>
+        <li>
+            <Link 
+            to="/signup"
+            className={
+              window.location.pathname === "/signup"
+            }
+            >
+              Sign Up
+             </Link>
+        </li>
+        <li>
+            <Link 
+            to="/login"
+            className={
+              window.location.pathname === "/login"
+            }
+            >
+              Login
+             </Link>
+        </li>
     </Ul>
   )
 }

@@ -4,15 +4,15 @@ import LoginBtn from "../LoginBtn"
 
 function Login() {
     return(
-        <div className="signupWrapper">
+        <div className="loginWrapper">
             {/* change to props later amigo */}
             <h1 className="signup">Login to Account</h1>
             <input type="text" name="email" placeholder="Email"></input>
             <input type="text" name="password" placeholder="Password"></input>
 
-            <div className="signUpInfo">
+            <div className="loginInfo">
                 <LoginBtn />
-                <div className="loginHere">Don't have an account? Signup here.</div>
+                <div className="signUpHere">Don't have an account? Signup here.</div>
             </div>
         </div>
     )

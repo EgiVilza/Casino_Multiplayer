@@ -1,9 +1,13 @@
 import React from "react"
 
-function Button({type = "default", className, children, onClick}) {
+
+// function Button({type = "default", className, children, onClick})
+function Button(props) {
     return (
-        <button onClick={onClick} className={["btn", `btn-${type}`, className.join(" ")]}>
-            {children}
+        // 
+        <button onClick={props.onClick} 
+        className={`card-btn ${props["data-value"]}`} >
+            {props.children}
         </button>
     )
 }

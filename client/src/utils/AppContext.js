@@ -1,8 +1,9 @@
 import React, { useContext, useReducer } from "react"
 // this is how we create our react context wrapper. So we say hey, we have this developercontext that we need to be shared, lets create it as a context and set the default values there
+// we can add more to the context here and only pull out those values we want to change
 const AppContext = React.createContext({
   // gotta make it the same data type - similar to what it's going to be changed to 
- title: ""
+ title: "", 
 });
 
 // REFERENCE UNIT 20 ACT 20******************

@@ -1,13 +1,20 @@
 import React from "react"
 import "./style.css"
-import Button from "react-bootstrap/Button"
+import Button from "../Button"
 
-// change to use props so you can use same button for other pages
+function handleClick(e) {
+    e.preventDefault();
+    console.log('The link was clicked.');
+  }
+
 function SignUpBtn() {
     return(
         <div className="signUpBtnWrapper">
             {/* make this own component */}
-            <Button variant="primary">Sign Up</Button>
+            <Button className="signup"
+                onClick={handleClick}>
+                Sign Up
+            </Button>
         </div>
     )
 }
