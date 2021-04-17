@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from "react-router-dom";
-import Game from '../../pages/ViewGamePage';
 
 const Ul = styled.ul`
   list-style: none;
@@ -33,9 +32,6 @@ const RightNav = ({ open }) => {
         <li>
             <Link 
             to="/server"
-            className={
-              window.location.pathname === "/server"
-            }
             >
               Choose Server
              </Link>
@@ -43,9 +39,6 @@ const RightNav = ({ open }) => {
         <li>
             <Link 
             to="/game"
-            className={
-              window.location.pathname === "/game"
-            }
             >
              Black Jack
              </Link>
@@ -53,9 +46,6 @@ const RightNav = ({ open }) => {
         <li>
             <Link 
             to="/viewgame"
-            className={
-              window.location.pathname === "/viewgame"
-            }
             >
               View Game
              </Link>
@@ -63,9 +53,6 @@ const RightNav = ({ open }) => {
         <li>
             <Link 
             to="/leaderboard"
-            className={
-              window.location.pathname === "/leaderboard"
-            }
             >
               Leader Board
              </Link>
@@ -73,9 +60,6 @@ const RightNav = ({ open }) => {
         <li>
             <Link 
             to="/signup"
-            className={
-              window.location.pathname === "/signup"
-            }
             >
               Sign Up
              </Link>
@@ -83,9 +67,6 @@ const RightNav = ({ open }) => {
         <li>
             <Link 
             to="/login"
-            className={
-              window.location.pathname === "/login"
-            }
             >
               Login
              </Link>

@@ -1,6 +1,8 @@
 import React from "react"
 import "./style.css"
 import SignUpBtn from "../SignUpBtn" 
+import { Link } from "react-router-dom";
+
 
 function Signup() {
     return(
@@ -13,7 +15,13 @@ function Signup() {
 
             <div className="signUpInfo">
                 <SignUpBtn />
-                <div className="loginHere">Already have an account? Login here.</div>
+                <div className="loginHere">Already have an account?
+                <Link
+                    to="/login"
+                    >
+                    Login here.
+                </Link>
+            </div>
             </div>
         </div>
     )
