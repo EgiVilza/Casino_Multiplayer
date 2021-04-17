@@ -12,6 +12,7 @@ import React from "react"
 import "./style.css"
 import Button from "react-bootstrap/Button"
 
+// change to use props so you can use same button for other pages
 function CreateServerBtn() {
     return(
         <div className="btnWrapper">

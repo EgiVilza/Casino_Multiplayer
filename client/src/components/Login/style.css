@@ -1,0 +1,29 @@
+.signupWrapper {
+    display:grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-gap: 1em;
+    grid-auto-rows: minmax(50px, auto);
+    margin: 1em;
+    text-align: left;
+    background-color: white;
+}
+
+.signupWrapper > input {
+    border-style: solid;
+    border-color: black;
+    padding: 1em
+}
+
+.signupWrapper > h1 {
+    text-align: center;
+}
+
+.signUpInfo {
+   display: grid;
+   grid-template-columns: repeat(2, 1fr)
+}
+
+.loginHere {
+    margin-top: 1em;
+    text-align: right;
+}
