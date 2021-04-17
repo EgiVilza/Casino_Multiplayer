@@ -17,9 +17,8 @@ function ChooseServer() {
 
     return(
         <div id="chooseServer">
-            {/* make this own component */}
-            <CreateServerBtn />
             <ServerInfo />
+            <CreateServerBtn />
         </div>
     )
 }

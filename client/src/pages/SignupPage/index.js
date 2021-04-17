@@ -6,7 +6,6 @@ import { useAppContext } from "../../utils/AppContext"
 function SignupPage() {
     const [ state, dispatch ] = useAppContext()
 
-    // setting the original title to Leader Board
     useEffect(() => {
         dispatch({
             type: "changeTitle",

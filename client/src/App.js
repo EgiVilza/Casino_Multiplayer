@@ -6,7 +6,7 @@ import LeaderBoard from "./pages/LeaderBoardPage"
 import GameBoardPage from "./pages/GameBoardPage"
 import NavBar from "./components/NavBar"
 import SignupPage from "./pages/SignupPage"
-import Login from "./components/Login"
+import LoginPage from "./pages/LoginPage"
 import { AppProvider } from "./utils/AppContext"
 
 import { BrowserRouter as Router, Route } from "react-router-dom";
@@ -23,7 +23,7 @@ function App() {
                     <Route export path="/viewgame" component={ViewGame} />
                     <Route exact path="/leaderboard" component={LeaderBoard} />
                     <Route exact path="/signup" component={SignupPage} />
-                    <Route exact path="/login" component={Login} />
+                    <Route exact path="/login" component={LoginPage} />
 
                 </AppProvider>
             </div>
