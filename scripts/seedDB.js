@@ -12,25 +12,25 @@ const playerSeed = [
   {
     username: "Ken", 
     email: "ken@email.com",
-    password: 123,
+    password: 123456,
     balance: 5000
   },
   {
     username: "Pam",
     email: "pam@email.com",
-    password: 124,
+    password: 124456,
     balance: 900
   },
   {
     username: "Pat",
     email: "pat@email.com",
-    password: 125,
+    password: 125456,
     balance: 6000
   },
   {
     username: "Ren",
     email: "ren@email.com",
-    password: 126,
+    password: 126456,
     balance: 1000
   },
 ];

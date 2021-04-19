@@ -1,5 +1,8 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const bodyParser = require("body-parser")
+const passport = require("./config/passportConfig")
+const session = require("express-session")
 
 // change items to routes later
 const players = require("./routes/api/playersAPI");
@@ -15,6 +18,18 @@ app.use(express.json());
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
+
+//Note: May not need this
+app.use(bodyParser.urlencoded({ extended: true }))
+
+//Use sessions to keep track of the user's login status
+app.use(session({
+  secret: "Casino Multiplayer",
+  resave: false,
+  saveUninitialized: false
+}))
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Add routes, both API and view, grabbing all the routes from the routes folder
 // anything that goes to api/items should refer to the items variable, which is that file

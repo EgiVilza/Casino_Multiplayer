@@ -18,7 +18,8 @@ const playerSchema = new Schema({
   },
   password: {
     type: String,
-    required: [true, "Please enter a password"]
+    required: [true, "Please enter a password"],
+    match: [/.{6,}/, "Password must have at least 6 characters"]
   },
   balance: { 
     type: Number, 

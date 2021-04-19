@@ -8,19 +8,24 @@ function Login() {
         <div className="loginWrapper">
             {/* change to props later amigo */}
             <h1 className="signup">Login to Account</h1>
-            <input type="text" name="email" placeholder="Email"></input>
-            <input type="text" name="password" placeholder="Password"></input>
 
-            <div className="loginInfo">
-                <LoginBtn />
-                <div className="signUpHere">Don't have an account? 
-                <Link
-                    to="/signup"
-                    >
-                    Signup here.
-                </Link>
+            {/* Login Form */}
+            <form action="/login" method="POST">
+                <input type="email" name="email" placeholder="Email"></input>
+                <input type="password" name="password" placeholder="Password"></input>
+
+                <div className="loginInfo">
+                    <LoginBtn />
+                    <div className="signUpHere">Don't have an account? 
+                    <Link
+                        to="/signup"
+                        >
+                        Signup here.
+                    </Link>
+                    </div>
                 </div>
-            </div>
+            </form>
+
         </div>
     )
 }

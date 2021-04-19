@@ -9,20 +9,25 @@ function Signup() {
         <div className="signupWrapper">
             {/* change to props later amigo */}
             <h1 className="signup">Signup For Free</h1>
-            <input type="text" name="username" placeholder="User Name"></input>
-            <input type="text" name="email" placeholder="Email"></input>
-            <input type="text" name="password" placeholder="Password"></input>
 
-            <div className="signUpInfo">
-                <SignUpBtn />
-                <div className="loginHere">Already have an account?
-                <Link
-                    to="/login"
-                    >
-                    Login here.
-                </Link>
-            </div>
-            </div>
+            {/* Signup Form */}
+            <form action="/signup" method="POST">
+                <input type="text" name="username" placeholder="User Name"></input>
+                <input type="email" name="email" placeholder="Email"></input>
+                <input type="password" name="password" placeholder="Password"></input>
+
+                <div className="signUpInfo">
+                    <SignUpBtn />
+                    <div className="loginHere">Already have an account?
+                    <Link
+                        to="/login"
+                        >
+                        Login here.
+                    </Link>
+                </div>
+                </div>   
+            </form>
+            
         </div>
     )
 }
