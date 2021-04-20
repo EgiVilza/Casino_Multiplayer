@@ -1,9 +1,9 @@
 const passport = require("passport")
-const LocalStrategy = require("passport-local")
-const User = require ("../models/player")
+const LocalStrategy = require("passport-local").Strategy
+const { Player } = require ("../models")
 
-passport.use(new LocalStrategy(User.authenticate()));
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
+passport.use(new LocalStrategy(Player.authenticate()));
+passport.serializeUser(Player.serializeUser());
+passport.deserializeUser(Player.deserializeUser());
 
 module.exports = passport

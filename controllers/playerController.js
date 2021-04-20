@@ -1,5 +1,6 @@
 // compare to booksController.js
 const db = require("../models")
+const passport = require("../config/passportConfig")
 
 // defining methods for the playerController to be used for the routes
 module.exports = {
@@ -12,6 +13,7 @@ module.exports = {
     }, 
     // create a player
     create: function(req, res) {
+        console.log(req.body)
         db.Player
         .create(req.body)
         .then(dbModel => res.json(dbModel))

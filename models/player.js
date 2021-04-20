@@ -2,6 +2,7 @@
 // player schema 
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+var passportLocalMongoose = require('passport-local-mongoose');
 
 const playerSchema = new Schema({
   username: {
@@ -27,6 +28,8 @@ const playerSchema = new Schema({
     default: 5000 
   }
 });
+
+playerSchema.plugin(passportLocalMongoose)
 
 const Player = mongoose.model("Player", playerSchema);
 

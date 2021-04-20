@@ -13,7 +13,9 @@ function SignUpBtn() {
             {/* make this own component */}
             <Button 
                 className="signup"
-                onClick={handleClick}>
+                // onClick={handleClick}
+                onSubmit={handleClick}
+                >
                 Sign Up
             </Button>
         </div>
