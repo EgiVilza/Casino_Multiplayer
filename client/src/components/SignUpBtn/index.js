@@ -11,8 +11,11 @@ function SignUpBtn() {
     return(
         <div className="signUpBtnWrapper">
             {/* make this own component */}
-            <Button className="signup"
-                onClick={handleClick}>
+            <Button 
+                className="signup"
+                // onClick={handleClick}
+                onSubmit={handleClick}
+                >
                 Sign Up
             </Button>
         </div>
