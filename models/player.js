@@ -2,19 +2,18 @@
 // player schema 
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-var passportLocalMongoose = require('passport-local-mongoose');
 
 const playerSchema = new Schema({
   username: {
     type: String,
     required: true,
     trim: true,
-    unique: [true, "Username already taken"]
+    unique: [true, "Username already taken"],
   },
   email: {
     type: String,
     required: true,
-    unique: true,
+    unique: [true, "Username already taken"],
     match: [/.+@.+\..+/, "Please enter a valid e-mail address"]
   },
   password: {
@@ -28,8 +27,6 @@ const playerSchema = new Schema({
     default: 5000 
   }
 });
-
-playerSchema.plugin(passportLocalMongoose)
 
 const Player = mongoose.model("Player", playerSchema);
 

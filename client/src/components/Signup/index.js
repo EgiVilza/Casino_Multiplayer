@@ -1,4 +1,4 @@
-import React, { useRef}  from "react"
+import React, { useRef }  from "react"
 import "./style.css"
 import SignUpBtn from "../SignUpBtn" 
 import { Link } from "react-router-dom";

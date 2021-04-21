@@ -1,9 +1,5 @@
 const express = require("express");
 const mongoose = require("mongoose");
-
-const bodyParser = require("body-parser")
-
-const passport = require("./config/passportConfig")
 const session = require("express-session")
 const router = require("./routes/api/playersAPI")
 const cors = require("cors")
@@ -24,9 +20,6 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
 
-//Note: May not need this
-app.use(bodyParser.urlencoded({ extended: true }))
-
 //Requiring routes
 app.use(cors())
 app.use(router)
@@ -37,8 +30,6 @@ app.use(session({
   resave: false,
   saveUninitialized: false
 }))
-app.use(passport.initialize());
-app.use(passport.session());
 
 // Connect to the Mongo DB
 mongoose
