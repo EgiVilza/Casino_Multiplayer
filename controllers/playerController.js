@@ -1,6 +1,5 @@
 // compare to booksController.js
 const db = require("../models")
-const passport = require("../config/passportConfig")
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
@@ -25,7 +24,6 @@ module.exports = {
           .then(dbModel => res.json(dbModel))
           .catch(err => res.status(422).json(err))
         });
-
     }, 
     // find a player by their id
     findById: function(req, res) {
@@ -64,6 +62,7 @@ module.exports = {
               // when that token expires
               // you can't
               // make token middleware
+              console.log("You are logged in")
               res.send("you got into my application") // token 
         }
         })
