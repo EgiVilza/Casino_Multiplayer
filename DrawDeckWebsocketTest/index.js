@@ -18,9 +18,6 @@ app.use(express.static('public'))
 
 let io = socket(server)
 
-//TEST DECK
-let updog = 'updog'
-
 //Creates initial deck on server start up
 let testDeck = new cardsLogic.deck()
 //shuffles the deck
