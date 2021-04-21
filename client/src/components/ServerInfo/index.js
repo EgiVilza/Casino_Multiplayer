@@ -5,9 +5,9 @@ function ServerInfo() {
     return(
         <div className="serverWrapper">
             {/* change to props later amigo */}
-            <div className="box box1">Server Name: </div>
-            <div className="box box2">Created By: </div>
-            <div className="box box3">Number of Players: </div>
+            <input type="text" name="serverName" placeholder="Server Name"></input>
+            <input type="text" name="createdBy" placeholder="Created By"></input>
+            <input type="text" name="playerNum" placeholder="Number of Players"></input>
         </div>
     )
 }

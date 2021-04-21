@@ -36,6 +36,7 @@ function Login() {
                 <div className="loginInfo">
                     <LoginBtn />
                     <div className="signUpHere">Don't have an account? 
+                    <br></br>
                     <Link
                         to="/signup"
                         >

@@ -37,6 +37,7 @@ function Signup() {
                 <div className="signUpInfo">
                     <SignUpBtn />
                     <div className="loginHere">Already have an account?
+                    <br></br>
                     <Link
                         to="/login"
                         >

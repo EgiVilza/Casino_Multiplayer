@@ -18,24 +18,50 @@ app.use(express.static('public'))
 
 let io = socket(server)
 
-//TEST DECK
-let updog = 'updog'
-
-
+//Creates initial deck on server start up
 let testDeck = new cardsLogic.deck()
+//shuffles the deck
 testDeck.shuffle()
 
+//Creates initial dealer on startup
 let testDealer = new cardsLogic.dealer()
+//Dealer completes first turn
+testDealer.dealerTurn(testDeck)
 
+//Array for storing player objects server side
 let players = []
 
+//Function that checks if all players in the player array are done drawing cards
+function allStandOrBust(){
 
-//Runs a new game on Start Up
+    let everyPlayerStandOrBust = players.every((player) => 
+    {
+       return player.bust || player.stand
+    })
 
+    return everyPlayerStandOrBust
+
+}
+//If all players are done drawing cards, causes the dealer to perform turns until he hits 17 or busts
+function runDealer(){
+    if(allStandOrBust()){
+    for(let z = 0; !testDealer.bust && !testDealer.stand; z++){
+        testDealer.dealerTurn(testDeck)
+    }
+    let dealerState = {
+        score: testDealer.score
+    }
+    io.sockets.emit('dealer', dealerState)
+    }
+}
 
 //
+
+
+//Websocket that fires on connection
 io.on('connection', function(socket){
-    let currentPlayer = players.find(({name}) => name === socket.id)
+    //Finds the player assosciated with the correct socket ID in the player array
+    let currentPlayer = players.find(({id}) => id === socket.id)
     if (!currentPlayer) {
 
         //Creates new player, using their socket ID as their name
@@ -47,33 +73,62 @@ io.on('connection', function(socket){
 
         //Pushes new player into the players array
         players.push(currentPlayer)
+   
     }
-    console.log('Socket connection made by player ', currentPlayer)
+   
     
     //Listens for a card draw request from client
     socket.on('drawCard', function(data){
-        
+        let cardDrawSuccessful = false
+        //Checks if the player has busted or is standing
+        if(!currentPlayer.stand && !currentPlayer.bust){
+
         //Causes current player to draw a card from the deck
         currentPlayer.drawCard(testDeck)
+        cardDrawSuccessful = true 
+        }
 
-        //Emits most recently drawn card and number of cards remaining in deck to client
+        //Object that stores information about the player and game state
+        
         let cardState = {
             playerID: currentPlayer.id,
+            playerName: currentPlayer.name,
+            playerHand: currentPlayer.hand,
             playerScore: currentPlayer.score,
+            playerBust: currentPlayer.bust,
+            drawSuccess: cardDrawSuccessful,
             drawnCard: currentPlayer.hand[currentPlayer.hand.length - 1],
             deckLength: testDeck.cards.length 
         }
-
-        console.log('Current player just drew a card', currentPlayer)
-
+        //Runs the dealer function
+        runDealer()
+        //Emits the cardState object to the client
         io.sockets.emit('drawCard', cardState)
     })
 
-/*
-    socket.on('joinGame', function(data){
-        let 
 
+    socket.on('nameSet', function(data){
+        //Finds the player assosciated with the correct socket ID in the player array
+        let currentPlayer = players.find(({id}) => id === socket.id)
+        //Sets the name of that player to the string received from the client
+        currentPlayer.name = data.playerName
     })
-*/
+
+    socket.on('stand', function(data){
+        //Finds the player assosciated with the correct socket ID in the player array
+        let currentPlayer = players.find(({id}) => id === socket.id)
+        //Sets that player's stand attribute to 'true'
+        currentPlayer.stand = true
+        //Creates an object that stores player's name and score
+        standState = {
+            playerName: currentPlayer.name,
+            playerScore: currentPlayer.score
+        }
+        //Runs the dealer function
+        runDealer()
+        //Emits the standState object back to the client
+        io.sockets.emit('stand', standState)
+    })
+
 
 })

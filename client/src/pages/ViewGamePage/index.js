@@ -4,7 +4,7 @@ import Board from "../../components/ViewGame/Board"
 import { useAppContext } from "../../utils/AppContext"
 
 
-function Game() {
+function ViewGamePage() {
     const [ state, dispatch ] = useAppContext()
 
     // setting the original title to Leader Board
@@ -22,4 +22,4 @@ function Game() {
     )
 }
 
-export default Game
+export default ViewGamePage
