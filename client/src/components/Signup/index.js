@@ -27,7 +27,6 @@ function Signup() {
         <div className="signupWrapper">
             {/* change to props later amigo */}
             <h1 className="signup">Signup For Free</h1>
-<<<<<<< Updated upstream
 
             {/* Signup Form */}
             <form onSubmit={onSubmit}>
@@ -38,6 +37,7 @@ function Signup() {
                 <div className="signUpInfo">
                     <SignUpBtn />
                     <div className="loginHere">Already have an account?
+                    <br></br>
                     <Link
                         to="/login"
                         >
@@ -47,23 +47,6 @@ function Signup() {
                 </div>   
             </form>
             
-=======
-            <input type="text" name="username" placeholder="User Name"></input>
-            <input type="text" name="email" placeholder="Email"></input>
-            <input type="text" name="password" placeholder="Password"></input>
-
-            <div className="signUpInfo">
-                <SignUpBtn />
-                <div className="loginHere">Already have an account? 
-                <br></br>
-                <Link
-                    to="/login"
-                    >
-                    Login here.
-                </Link>
-            </div>
-            </div>
->>>>>>> Stashed changes
         </div>
     )
 }
