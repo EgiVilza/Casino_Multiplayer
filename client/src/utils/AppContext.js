@@ -1,9 +1,11 @@
 import React, { useContext, useReducer } from "react"
 // this is how we create our react context wrapper. So we say hey, we have this developercontext that we need to be shared, lets create it as a context and set the default values there
 // we can add more to the context here and only pull out those values we want to change
+
 const AppContext = React.createContext({
   // gotta make it the same data type - similar to what it's going to be changed to 
  title: "", 
+ socket: null,
 });
 
 // REFERENCE UNIT 20 ACT 20******************
@@ -19,6 +21,8 @@ const reducer = (state, action) => {
     case "changeTitle":
       // grab the state, change title from the state to acttion.title
       return { ...state, title: action.title}
+    case "setSocket":
+      return { ...state, socket: action.socket}
     default:
       throw new Error(`Invalid action type: ${action.type}`);
   }
@@ -38,6 +42,7 @@ const useAppContext = () => {
 const AppProvider = ({ value={}, ...props }) => {
   // calling useReducer always returns state and dispatch
   // passing in the reducer and the value from the AppProvider
+  console.log(value, "???")
   const [state, dispatch] = useReducer(reducer, { ...value });
 
   // returning the provider

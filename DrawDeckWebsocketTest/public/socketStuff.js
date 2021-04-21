@@ -8,7 +8,6 @@ let socketID = ''
 
 //Sets the socketID variable to the socket ID
 socket.on('connect', function(){
-  socketID = socket.id
 })
 
 // Query DOM
