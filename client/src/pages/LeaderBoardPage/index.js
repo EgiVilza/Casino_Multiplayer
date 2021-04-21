@@ -4,7 +4,7 @@ import { useAppContext } from "../../utils/AppContext"
 
 // pulling the state and the dispatch function from useAppContext
 
-function LeaderBoard() {
+function LeaderBoardPage() {
     const [ state, dispatch ] = useAppContext()
 
     // setting the original title to Leader Board
@@ -25,4 +25,4 @@ function LeaderBoard() {
     )
 }
 
-export default LeaderBoard
+export default LeaderBoardPage

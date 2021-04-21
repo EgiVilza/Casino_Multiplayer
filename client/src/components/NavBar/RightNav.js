@@ -33,7 +33,7 @@ const RightNav = ({ open }) => {
             <Link 
             to="/server"
             >
-              Choose Server
+              Create Server
              </Link>
         </li>
         <li>

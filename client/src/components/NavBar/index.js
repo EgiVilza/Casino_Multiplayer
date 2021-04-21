@@ -1,10 +1,9 @@
 /* eslint-disable no-unused-vars */
+import React from "react"
 import styled from 'styled-components';
 import Burger from './Burger';
-// import NavContext from "../../utils/NavContext"
-// import React, { useState, useEffect } from "react";
-import React from "react"
 import {useAppContext} from "../../utils/AppContext"
+import { Link } from "react-router-dom";
 
 const Nav = styled.nav`
   background-color: white;
@@ -23,16 +22,17 @@ const Nav = styled.nav`
 
 function Navbar() {
 
-  // pulling the state from useAppContext
   const [ state, _ ] = useAppContext()
 
   return (
     <Nav>
       <div className="logo">
-        Blackjack Casino
+        <Link
+          to="/homepage"
+          >
+          Home
+        </Link>
       </div>
-
-      {/* put the state.title here */}
       <h1>{state.title} </h1>
       <Burger />
     </Nav>

@@ -7,7 +7,7 @@
     text-align: left;
 }
 
-.serverWrapper > div {
+.serverWrapper > input {
     border-style: solid;
     border-color: black;
     padding: 1em
