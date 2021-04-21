@@ -4,7 +4,8 @@
 
 const router = require('express').Router()
 const playerController = require("../../controllers/playerController")
-//const db = require("../../models")
+const passport = require("../../config/passportConfig")
+const authenticatedFunctions = require("../../config/middleware/isAuthenticatedConfig")
 
 router.route("/")
     .get(playerController.findAll)
@@ -18,22 +19,28 @@ router.route("/:id")
 router.route("/signup")
     .post(playerController.create)
 
-
+router.route("/login", passport.authenticate("local"))
+    .post(playerController.isLoggedIn)
 
 module.exports = router
+
+// router.route("/logout", function (req, res) {
+//     req.logout();
+//     res.redirect("/");
+// });
 
 // router.route("/login", passport.authenticate("local", {
 //     successRedirect: "/viewgame",
 //     failureRedirect: "/login"
 // }))
 
-// router.post("/signup", (req, res) => {
-//     db.Player.create({
-//         username: req.body.username,
-//         email: req.body.email,
-//         password: req.body.password
-//     })
-//     .then(user => res.json(user))
-//     .catch(err => res.status(422).end())
+// router.route("/login", passport.authenticate("local", {
+//     successRedirect: "/viewgame",
+//     failureRedirect: "/login"
+// }), function (req, res) {
+// });
+
+// router.route("/viewgame", test.isLoggedIn, function (req, res) {
+//     res.render("/viewgame")
 // })
 

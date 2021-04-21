@@ -9,12 +9,12 @@ const playerSchema = new Schema({
     type: String,
     required: true,
     trim: true,
-    unique: [true, "Username already taken"]
+    unique: [true, "Username already taken"],
   },
   email: {
     type: String,
     required: true,
-    unique: true,
+    unique: [true, "Username already taken"],
     match: [/.+@.+\..+/, "Please enter a valid e-mail address"]
   },
   password: {
