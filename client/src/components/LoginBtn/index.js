@@ -10,7 +10,8 @@ function handleClick(e) {
 function LoginBtn() {
     return(
         <div className="LoginBtnWrapper">
-            <Button className="login"
+            <Button 
+                className="login"
                 onClick={handleClick}>
                 Login
             </Button>

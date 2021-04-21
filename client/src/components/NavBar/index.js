@@ -14,7 +14,9 @@ const Nav = styled.nav`
   display: flex;
   justify-content: space-between;
   .logo {
-    padding: 15px 0;
+    font-family: 'Rouge Script', cursive;
+    font-size: 40px;
+    color: green;
   }
 `
 
