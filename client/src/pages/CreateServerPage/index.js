@@ -4,7 +4,7 @@ import CreateServerBtn from "../../components/CreateServerBtn"
 import ServerInfo from "../../components/ServerInfo"
 import { useAppContext } from "../../utils/AppContext"
 
-function ChooseServer() {
+function CreateServerPage() {
     const [ state, dispatch ] = useAppContext()
 
     // setting the original title to Leader Board
@@ -23,4 +23,4 @@ function ChooseServer() {
     )
 }
 
-export default ChooseServer
+export default CreateServerPage
