@@ -15,7 +15,9 @@ const Nav = styled.nav`
   display: flex;
   justify-content: space-between;
   .logo {
-    padding: 15px 0;
+    font-family: 'Rouge Script', cursive;
+    font-size: 40px;
+    color: green;
   }
 `
 
@@ -27,7 +29,7 @@ function Navbar() {
   return (
     <Nav>
       <div className="logo">
-        Main page button here.
+        Blackjack Casino
       </div>
 
       {/* put the state.title here */}

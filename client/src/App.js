@@ -18,6 +18,7 @@ function App() {
                 <AppProvider>
                 <NavBar />
                 {/* original "/" route use for sign up and login page */}
+                    <Route exact path="/" component={LoginPage} />
                     <Route export path="/server" component={CreateServer} />
                     <Route exact path="/game" component={GameBoardPage} />
                     <Route export path="/viewgame" component={ViewGame} />
