@@ -21,41 +21,15 @@ function Login() {
         if (emailRef.current.value === "") {
             setMessage("Email is missing")
             setClasses(" alert alert-warning")
-        }
+            return
+        } 
 
         var data = {
                     email: emailRef.current.value, 
                     password: passwordRef.current.value
                 }
-        API.login(data);
-
-        const viewgames = ( data ) => {
-            let body = {
-                ...data,
-                token: getTokenFromLocalStorage(),
-              
-            }
-            console.log(body)
-        }
-           
-        function getTokenFromLocalStorage() {
-            const token = localStorage.getItem("CasinoToken")
-            console.log(token)
-        }
-
-        viewgames()
+        API.login(data)
     }
-
-   // API.Login(data)
-   // const viewgames = ( data ) => {
-//       let body = {
-  //         ...data,
-    //       token: getTokenFromLocalStorage(),
-
-
-      //  }
-  // }
-
 
     return(
         <div className="loginWrapper">

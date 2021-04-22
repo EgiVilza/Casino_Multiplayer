@@ -3,6 +3,7 @@ import "./style.css"
 import SignUpBtn from "../SignUpBtn" 
 import { Link } from "react-router-dom";
 import axios from "axios"
+import API from "../../utils/API"
 
 function Signup() {
 
@@ -19,12 +20,20 @@ function Signup() {
         setMessage("")
         setClasses("")
 
+        const password = passwordRef.current.value
+
         if (usernameRef.current.value === "") {
             setMessage("Username is missing")
             setClasses(" alert alert-warning")
+            return
         } else if (emailRef.current.value === "") {
             setMessage("Email is missing")
             setClasses(" alert alert-warning")
+            return
+        } else if (password.length < 6) {
+            setMessage("Password needs at least 6 characters")
+            setClasses(" alert alert-warning")
+            return
         }
 
         var data = {
@@ -32,14 +41,13 @@ function Signup() {
             password: passwordRef.current.value,
             username: usernameRef.current.value
         }
+        API.signup(data)
 
-        axios.post("http://localhost:8080/signup", data)
-            .then( response => {
-                console.log(response)
-                setMessage(response.data.username + " Account is created")
-                setClasses(" alert alert-success")
-            })
-            }
+        setMessage("Account Created")
+        setClasses(" alert alert-success")
+
+    }
+        
 
     return(
         <div className="signupWrapper">
