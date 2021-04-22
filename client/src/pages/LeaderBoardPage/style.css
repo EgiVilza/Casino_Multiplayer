@@ -1,13 +1,11 @@
 .leaderWrapper {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    /* display: grid;
+    grid-template-columns: repeat(3, 1fr); */
     border-style:solid;
     margin: 4em;
     background-color: white;
 }
+thead {
+    font-family: 'Rouge Script', cursive;
 
-.leaderWrapper > div {
-    display: grid;
-    /* border-style: solid; */
-    padding: 1em
 }
