@@ -26,5 +26,3 @@ router.route("/viewgame")
 
 
 module.exports = router
-
-// playerController.test, 

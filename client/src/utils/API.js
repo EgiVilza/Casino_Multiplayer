@@ -1,14 +1,27 @@
 import axios from 'axios';
-import React, { Component } from 'react';
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
-    login(data) {  
-        axios.post("http://localhost:8080/login", data)
+    login(data) {
+        return new Promise((resolve, reject) => {
+            axios.post("http://localhost:8080/login", data)
             .then( response => {
                 //get token stuff here
                 // make a function to check localstorage for token and send in request if it exists
                 console.log(response)
+
+                // Variable for error or login messages
+                let message = {}
+
+                //If login is not valid, set "Invalid Login" message, else set "Logged In"
+                if (response.data.message === "Invalid Login") {
+                    message = { message: "Invalid Login", alert: " alert alert-danger"}
+                    resolve(message)
+                } else {
+                    message = { message: "Logged In", alert: " alert alert-success"}
+                }
+
+                // Store token in a variable
                 const tokenStringify = JSON.stringify(response.data.token)
                 const token = tokenStringify.substring(1).slice(0,-1)
 
@@ -21,13 +34,32 @@ export default {
                 }
 
                 this.viewgame(body)
+
+                resolve(message)
             })
+            .catch(err => reject(err))
+        })
     },
     signup(data) {
-        axios.post("http://localhost:8080/signup", data)
+        return new Promise((resolve, reject) => {
+            axios.post("http://localhost:8080/signup", data)
             .then( response => {
                 console.log(response)
+
+                // Variable for error or login messages
+                let message = {}
+
+                // If err, set messsage to "Username or email already taken", else "Account Created"
+                if (response.data === "Username or email already taken") {
+                    message = { message: response.data, alert: " alert alert-danger"}
+                } else {
+                    message = { message: "Account Created", alert: " alert alert-success"}
+                }
+
+                resolve(message)
             })
+            .catch(err => reject(err))
+        })
     },
     viewgame(data) {
         axios.post("http://localhost:8080/viewgame", data)
@@ -35,5 +67,4 @@ export default {
                 console.log(response)
             })
     }
-    
 }

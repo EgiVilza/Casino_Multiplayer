@@ -3,6 +3,7 @@ import "./style.css"
 import LoginBtn from "../LoginBtn" 
 import { Link } from "react-router-dom";
 import API from "../../utils/API"
+import ViewGamePage from "../../pages/ViewGamePage"
 
 function Login() {
 
@@ -15,20 +16,29 @@ function Login() {
     const onSubmit = (e) => {
         e.preventDefault()
 
+        // Reset messages
         setMessage("")
         setClasses("")
 
+        // If email is missing, set message to "Email is missing"
         if (emailRef.current.value === "") {
             setMessage("Email is missing")
             setClasses(" alert alert-warning")
             return
         } 
 
-        var data = {
+        const data = {
                     email: emailRef.current.value, 
                     password: passwordRef.current.value
                 }
+
+        // Attempt to login and recieve an alert message
         API.login(data)
+            .then(results => {
+                setMessage(results.message)
+                setClasses(results.alert)
+            })
+            .catch(err => console.log(err));
     }
 
     return(

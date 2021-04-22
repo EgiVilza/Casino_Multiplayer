@@ -2,7 +2,6 @@ import React, { useRef, useState }  from "react"
 import "./style.css"
 import SignUpBtn from "../SignUpBtn" 
 import { Link } from "react-router-dom";
-import axios from "axios"
 import API from "../../utils/API"
 
 function Signup() {
@@ -20,8 +19,11 @@ function Signup() {
         setMessage("")
         setClasses("")
 
+        // store user password in a variable
         const password = passwordRef.current.value
 
+        // If username/email is empty, display missing and return, 
+        // If password is less than 6 characters, display "password needs 6 characters"
         if (usernameRef.current.value === "") {
             setMessage("Username is missing")
             setClasses(" alert alert-warning")
@@ -41,10 +43,14 @@ function Signup() {
             password: passwordRef.current.value,
             username: usernameRef.current.value
         }
-        API.signup(data)
 
-        setMessage("Account Created")
-        setClasses(" alert alert-success")
+        // Attemp to sign up an account a recieve an alert message
+        API.signup(data)
+            .then(results => {
+                setMessage(results.message)
+                setClasses(results.alert)
+            })
+            .catch(err => console.log(err));
 
     }
         
