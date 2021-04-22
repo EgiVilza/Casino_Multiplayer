@@ -20,6 +20,7 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
 
+
 //Requiring routes
 app.use(cors())
 app.use(router)
@@ -80,13 +81,18 @@ function allStandOrBust(){
 }
 //If all players are done drawing cards, causes the dealer to perform turns until he hits 17 or busts
 function runDealer(){
+    console.log('LigmaUpdog')
+    console.log(players)
     if(allStandOrBust()){
+    console.log('Deeznuts')
     for(let z = 0; !testDealer.bust && !testDealer.stand; z++){
         testDealer.dealerTurn(testDeck)
     }
     let dealerState = {
-        score: testDealer.score
+        score: testDealer.score,
+        hand: testDealer.hand
     }
+    console.log('Dealer performed turn')
     io.sockets.emit('dealer', dealerState)
     }
 }
@@ -164,6 +170,15 @@ io.on('connection', function(socket){
         //Runs the dealer function
         runDealer()
         //Emits the standState object back to the client
+        io.sockets.emit('stand', standState)
+    })
+
+    //test
+    socket.on('renderHand', function(data){
+        let currentPlayer = players.find(({id}) => id === socket.id)
+       handState = {
+           playerHand: currentPlayer.hand
+       }
         io.sockets.emit('stand', standState)
     })
 
