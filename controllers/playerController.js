@@ -23,7 +23,7 @@ module.exports = {
           db.Player
           .create({username, password: hash, email})
           .then(dbModel => res.json(dbModel))
-          .catch(err => res.status(422).json(err))
+          .catch(err => res.send("Username or email already taken").json(err))
         });
     }, 
     // find a player by their id
@@ -32,14 +32,15 @@ module.exports = {
           .findById(req.params.id)
           .then(dbModel => res.json(dbModel))
           .catch(err => res.status(422).json(err));
-      },
-      // update a current player
+    },
+    // update a current player
     update: function(req, res) {
       db.Player
         .findOneAndUpdate({ _id: req.params.id }, req.body)
         .then(dbModel => res.json(dbModel))
         .catch(err => res.status(422).json(err));
     },
+    // remove a player
     remove: function(req, res) {
       db.Player
         .findById({ _id: req.params.id })
@@ -47,38 +48,30 @@ module.exports = {
         .then(dbModel => res.json(dbModel))
         .catch(err => res.status(422).json(err));
     },
+    // login to account and create a token
     isLoggedIn: function(req, res) {
       let {email, password} = req.body
       db.Player.findOne({email}).then((player) => {
         bcrypt.compare(password, player.password, function(err, result) {
           if(result) {
-
             jwt.sign({ result }, "casinokey", { expiresIn: "1h"} , (err, token) => {
               res.send({ token , message: "Account Logged In"})
             })
-
           } else {
             res.send({ message: "Invalid Login" })
           }
         })
       })
     },
+    // verify token
     verifyCurrentToken: function(req, res) {
-      //console.log("Second, did this work?: " + req.body.token)
       jwt.verify(req.token, "casinokey", (err, authData) => {
-        
         if(err) {
           res.sendStatus(404)
         } else {
           res.send({ message: "post created", authData})
         }
-
       })
     },
-    test: function (req, res) {
-      let { headers } = req.body
-      const testing = headers
-      console.log("Did this work?: " + testing)
-    }
       
 }
