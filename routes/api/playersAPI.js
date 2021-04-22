@@ -3,6 +3,7 @@
 // logic for these routes is in playerController.js
 
 const router = require('express').Router()
+const middleware = require("../../config/middleware/jsonWebToken")
 const playerController = require("../../controllers/playerController")
 
 router.route("/")
@@ -20,6 +21,10 @@ router.route("/signup")
 router.route("/login")
     .post(playerController.isLoggedIn)
 
+router.route("/viewgame")
+    .post(middleware.verifyToken, playerController.verifyCurrentToken)
+
+
 module.exports = router
 
-
+// playerController.test, 

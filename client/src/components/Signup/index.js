@@ -1,7 +1,9 @@
-import React, { useRef }  from "react"
+import React, { useRef, useState }  from "react"
 import "./style.css"
 import SignUpBtn from "../SignUpBtn" 
 import { Link } from "react-router-dom";
+import axios from "axios"
+import API from "../../utils/API"
 
 function Signup() {
 
@@ -9,19 +11,43 @@ function Signup() {
     const emailRef = useRef("")
     const passwordRef = useRef("")
 
+    const [message, setMessage] = useState("")
+    const [classes, setClasses] = useState("")
+
     const onSubmit = (e) => {
         e.preventDefault()
 
-        fetch("http://localhost:8080/signup", {
-            method: "POST",
-            headers: {"content-type": "application/json"},
-            body: JSON.stringify({
-                email: emailRef.current.value, 
-                password: passwordRef.current.value, 
-                username: usernameRef.current.value
-            })
-        })
+        setMessage("")
+        setClasses("")
+
+        const password = passwordRef.current.value
+
+        if (usernameRef.current.value === "") {
+            setMessage("Username is missing")
+            setClasses(" alert alert-warning")
+            return
+        } else if (emailRef.current.value === "") {
+            setMessage("Email is missing")
+            setClasses(" alert alert-warning")
+            return
+        } else if (password.length < 6) {
+            setMessage("Password needs at least 6 characters")
+            setClasses(" alert alert-warning")
+            return
+        }
+
+        var data = {
+            email: emailRef.current.value, 
+            password: passwordRef.current.value,
+            username: usernameRef.current.value
+        }
+        API.signup(data)
+
+        setMessage("Account Created")
+        setClasses(" alert alert-success")
+
     }
+        
 
     return(
         <div className="signupWrapper">
@@ -47,6 +73,7 @@ function Signup() {
                 </div>   
             </form>
             
+            <p className={`message` + classes} role="alert">{message}</p>
         </div>
     )
 }
