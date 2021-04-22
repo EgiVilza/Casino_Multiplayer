@@ -37,6 +37,7 @@ function App() {
                 {socket && (
                 <AppProvider value={{socket}}>
                 <NavBar />
+                    <Route exact path="/" component={LoginPage} />
                     <Route export path="/homepage" component={HomePage} />
                     <Route export path="/server" component={CreateServerPage} />
                     <Route exact path="/game" component={GameBoardPage} />
@@ -44,7 +45,7 @@ function App() {
                     <Route exact path="/leaderboard" component={LeaderBoardPage} />
                     <Route exact path="/signup" component={SignupPage} />
                     <Route exact path="/login" component={LoginPage} />
-                </AppProvider>)}}
+                </AppProvider>)}
             </div>
         </Router>
     )

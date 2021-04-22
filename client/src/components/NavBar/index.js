@@ -7,16 +7,18 @@ import { Link } from "react-router-dom";
 
 const Nav = styled.nav`
   background-color: white;
+  opacity: 0.75;
   width: 100%;
   height: 55px;
-  border-bottom: 2px solid #f1f1f1;
   padding: 0 20px;
   display: flex;
   justify-content: space-between;
   .logo {
     font-family: 'Rouge Script', cursive;
     font-size: 40px;
-    color: green;
+  }
+  a {
+    color: red;
   }
 `
 
