@@ -3,12 +3,13 @@ const mongoose = require("mongoose");
 const session = require("express-session")
 const router = require("./routes/api/playersAPI")
 const cors = require("cors")
+const middleware = require("./config/middleware/jsonWebToken")
 
 // websocket ish
 let socket = require('socket.io')
 let cardsLogic = require('./cards.js')
 
-const app = express();
+const app = express("*");
 const PORT = process.env.PORT || 8080;
 
 // Define middleware here
@@ -40,11 +41,7 @@ mongoose
 // Start the API server
 let server = app.listen(PORT, function() {
   console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
-  //console.log("")
 });
-
-
-
 
 
 

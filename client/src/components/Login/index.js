@@ -1,27 +1,61 @@
-import React, { useRef } from "react"
-//import axios from "axios"
+import React, { useRef, useState } from "react"
 import "./style.css"
 import LoginBtn from "../LoginBtn" 
 import { Link } from "react-router-dom";
+import API from "../../utils/API"
 
 function Login() {
 
     const emailRef = useRef("")
     const passwordRef = useRef("")
+    
+    const [message, setMessage] = useState("")
+    const [classes, setClasses] = useState("")
 
     const onSubmit = (e) => {
         e.preventDefault()
 
-        fetch("http://localhost:8080/login", {
-            method: "POST",
-            headers: {"content-type": "application/json"},
-            body: JSON.stringify({
-                email: emailRef.current.value, 
-                password: passwordRef.current.value
-            })
-        })
+        setMessage("")
+        setClasses("")
+
+        if (emailRef.current.value === "") {
+            setMessage("Email is missing")
+            setClasses(" alert alert-warning")
+        }
+
+        var data = {
+                    email: emailRef.current.value, 
+                    password: passwordRef.current.value
+                }
+        API.login(data);
+
+        const viewgames = ( data ) => {
+            let body = {
+                ...data,
+                token: getTokenFromLocalStorage(),
+              
+            }
+            console.log(body)
+        }
            
+        function getTokenFromLocalStorage() {
+            const token = localStorage.getItem("CasinoToken")
+            console.log(token)
+        }
+
+        viewgames()
     }
+
+   // API.Login(data)
+   // const viewgames = ( data ) => {
+//       let body = {
+  //         ...data,
+    //       token: getTokenFromLocalStorage(),
+
+
+      //  }
+  // }
+
 
     return(
         <div className="loginWrapper">
@@ -45,6 +79,8 @@ function Login() {
                     </div>
                 </div>
             </form>
+
+            <p className={`message` + classes} role="alert">{message}</p>
 
         </div>
     )
