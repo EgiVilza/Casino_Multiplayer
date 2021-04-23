@@ -16,6 +16,7 @@ function Signup() {
     const onSubmit = (e) => {
         e.preventDefault()
 
+        // Reset messages
         setMessage("")
         setClasses("")
 
@@ -38,13 +39,14 @@ function Signup() {
             return
         }
 
+        // Store email, password, and username in an object
         var data = {
             email: emailRef.current.value, 
             password: passwordRef.current.value,
             username: usernameRef.current.value
         }
 
-        // Attemp to sign up an account a recieve an alert message
+        // Attempt to sign up an account a recieve an alert message
         API.signup(data)
             .then(results => {
                 setMessage(results.message)
@@ -61,7 +63,7 @@ function Signup() {
             <h1 className="signup">Signup For Free</h1>
 
             {/* Signup Form */}
-            <form onSubmit={onSubmit}>
+            <form className="signupWrapper__form" onSubmit={onSubmit}>
                 <input type="text" ref={usernameRef} name="username" placeholder="User Name"></input>
                 <input type="email" ref={emailRef} name="email" placeholder="Email"></input>
                 <input type="password" ref={passwordRef} name="password" placeholder="Password"></input>

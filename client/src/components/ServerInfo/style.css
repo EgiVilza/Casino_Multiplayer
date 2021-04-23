@@ -1,4 +1,5 @@
 .serverWrapper {
+    justify-content: center;
     display:grid;
     grid-template-columns: repeat(1, 1fr);
     grid-gap: 1em;
@@ -11,4 +12,8 @@
     border-style: solid;
     border-color: black;
     padding: 1em
+}
+
+.server {
+    text-align: center;
 }

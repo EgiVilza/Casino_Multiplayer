@@ -15,9 +15,11 @@ router.route("/:id")
     .put(playerController.update)
     .delete(playerController.remove);
 
+// Route to signup user
 router.route("/signup")
     .post(playerController.create)
 
+// Route to login user
 router.route("/login")
     .post(playerController.isLoggedIn)
 

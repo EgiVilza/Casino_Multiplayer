@@ -3,7 +3,6 @@ import "./style.css"
 import LoginBtn from "../LoginBtn" 
 import { Link } from "react-router-dom";
 import API from "../../utils/API"
-import ViewGamePage from "../../pages/ViewGamePage"
 
 function Login() {
 
@@ -27,6 +26,7 @@ function Login() {
             return
         } 
 
+        // Store email and password in an object
         const data = {
                     email: emailRef.current.value, 
                     password: passwordRef.current.value

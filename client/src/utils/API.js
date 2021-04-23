@@ -6,8 +6,6 @@ export default {
         return new Promise((resolve, reject) => {
             axios.post("http://localhost:8080/login", data)
             .then( response => {
-                //get token stuff here
-                // make a function to check localstorage for token and send in request if it exists
                 console.log(response)
 
                 // Variable for error or login messages

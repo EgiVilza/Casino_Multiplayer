@@ -5,8 +5,7 @@ const jwt = require("jsonwebtoken")
 
 module.exports = {
     verifyToken: function(req, res, next) {
-        // // Get auth header value
-
+        // Get auth header value
         const bearerHeader = req.body.headers
 
         //Check if bearer is undefined
