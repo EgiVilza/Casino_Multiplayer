@@ -6,7 +6,8 @@
     padding: 2em;
     text-align: center;
     opacity: 0.75;
-
+    position: relative;
+    z-index: -1;
 }
 h1 {
     font-family: 'Rouge Script', cursive;

@@ -20,6 +20,15 @@ const Nav = styled.nav`
   a {
     color: red;
   }
+  .navTitle {
+    margin: auto;
+  }
+
+  @media (max-width: 400px) {
+    .navTitle {
+      visibility: hidden;
+    }
+  }
 `
 
 function Navbar() {
@@ -28,14 +37,15 @@ function Navbar() {
 
   return (
     <Nav>
-      <div className="logo">
+      <div>
         <Link
           to="/homepage"
+          className="logo"
           >
           Home
         </Link>
       </div>
-      <h1>{state.title} </h1>
+      <h1 className="navTitle"> {state.title} </h1>
       <Burger />
     </Nav>
   )

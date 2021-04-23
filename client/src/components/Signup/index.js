@@ -47,10 +47,15 @@ function Signup() {
         }
 
         // Attempt to sign up an account a recieve an alert message
+        // When signed up, redirect to login page
         API.signup(data)
             .then(results => {
                 setMessage(results.message)
                 setClasses(results.alert)
+
+                if (results.message === "Account Created") {
+                    window.location = "/login"
+                }
             })
             .catch(err => console.log(err));
 

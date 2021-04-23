@@ -24,6 +24,10 @@ router.route("/login")
     .post(playerController.isLoggedIn)
 
 router.route("/viewgame")
+    .get(middleware.verifyToken, playerController.verifyCurrentToken)
+    .post(middleware.verifyToken, playerController.verifyCurrentToken)
+
+router.route("/game")
     .post(middleware.verifyToken, playerController.verifyCurrentToken)
 
 

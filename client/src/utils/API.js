@@ -6,8 +6,6 @@ export default {
         return new Promise((resolve, reject) => {
             axios.post("http://localhost:8080/login", data)
             .then( response => {
-                console.log(response)
-
                 // Variable for error or login messages
                 let message = {}
 
@@ -26,12 +24,7 @@ export default {
                 // Store Token in local storage
                 localStorage.setItem("CasinoToken", token)
 
-                let body = {
-                    token: token,
-                    headers: "bearer " + token
-                }
-
-                this.viewgame(body)
+                this.viewgame(this.getTokenFromLocalStorage())
 
                 resolve(message)
             })
@@ -64,5 +57,30 @@ export default {
             .then( response => {
                 console.log(response)
             })
-    }
+    },
+    postToSocket(data) {
+        axios.post("http://localhost:8080/game", data)
+            .then( response => {
+                console.log(response)
+            })
+    },
+    verifyToken(data) {
+        return new Promise((resolve, reject) => {
+            axios.post("http://localhost:8080/game", data)
+            .then( response => {
+                console.log(response)
+            })
+            .catch(err => reject(err))
+        })
+    },
+    getTokenFromLocalStorage() {
+        const token = localStorage.getItem("CasinoToken")
+
+        let body = {
+            token: token,
+            headers: "bearer " + token
+        }
+
+        return body
+    },
 }

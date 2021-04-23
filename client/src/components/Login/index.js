@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react"
 import "./style.css"
 import LoginBtn from "../LoginBtn" 
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import API from "../../utils/API"
 
 function Login() {
@@ -33,10 +33,16 @@ function Login() {
                 }
 
         // Attempt to login and recieve an alert message
+        // When logged in, redirect to game page
         API.login(data)
             .then(results => {
                 setMessage(results.message)
                 setClasses(results.alert)
+
+                if (results.message === "Logged In") {
+                    //window.location = "/viewgame";
+                    <Redirect to="/viewgame" />
+                }
             })
             .catch(err => console.log(err));
     }
