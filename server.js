@@ -1,14 +1,15 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const session = require("express-session")
-const router = require("./routes/api")
+const router = require("./routes/api/playersAPI")
 const cors = require("cors")
+const middleware = require("./config/middleware/jsonWebToken")
 
 // websocket ish
 let socket = require('socket.io')
 let cardsLogic = require('./cards.js')
 
-const app = express();
+const app = express("*");
 const PORT = process.env.PORT || 8080;
 
 // Define middleware here
@@ -40,11 +41,7 @@ mongoose
 // Start the API server
 let server = app.listen(PORT, function() {
   console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
-  //console.log("")
-});   
- 
-
-
+});
 
 
 
@@ -80,13 +77,18 @@ function allStandOrBust(){
 }
 //If all players are done drawing cards, causes the dealer to perform turns until he hits 17 or busts
 function runDealer(){
+    console.log('LigmaUpdog')
+    console.log(players)
     if(allStandOrBust()){
+    console.log('Deeznuts')
     for(let z = 0; !testDealer.bust && !testDealer.stand; z++){
         testDealer.dealerTurn(testDeck)
     }
     let dealerState = {
-        score: testDealer.score
+        score: testDealer.score,
+        hand: testDealer.hand
     }
+    console.log('Dealer performed turn')
     io.sockets.emit('dealer', dealerState)
     }
 }
@@ -167,5 +169,14 @@ io.on('connection', function(socket){
         io.sockets.emit('stand', standState)
     })
 
+    //test
+    socket.on('renderHand', function(data){
+        let currentPlayer = players.find(({id}) => id === socket.id)
+       handState = {
+           playerHand: currentPlayer.hand
+       }
+        io.sockets.emit('stand', standState)
+    })
 
-}) 
+
+})

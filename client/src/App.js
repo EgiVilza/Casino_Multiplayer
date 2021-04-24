@@ -16,7 +16,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 
 function App() {
     console.log('hello')
-   const [socket, setSocket] = useState(null)
+    const [socket, setSocket] = useState(null)
     useEffect(() => 
     {
         var socketInEffect = io('http://localhost:8080')

@@ -6,6 +6,8 @@ const AppContext = React.createContext({
   // gotta make it the same data type - similar to what it's going to be changed to 
  title: "", 
  socket: null,
+ hand: [],
+ dealerHand: []
 });
 
 // REFERENCE UNIT 20 ACT 20******************
@@ -23,6 +25,10 @@ const reducer = (state, action) => {
       return { ...state, title: action.title}
     case "setSocket":
       return { ...state, socket: action.socket}
+      case 'drawCard':
+        return {...state, hand: [...action.currentPlayerHand]}
+      case 'dealer':
+        return {...state, dealerHand: [...action.currentDealerHand]}
     default:
       throw new Error(`Invalid action type: ${action.type}`);
   }
