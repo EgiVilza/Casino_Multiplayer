@@ -1,11 +1,13 @@
 .leaderWrapper {
     /* display: grid;
     grid-template-columns: repeat(3, 1fr); */
+    opacity: 0.75;
     border-style:solid;
     margin: 4em;
     background-color: white;
+
 }
 thead {
     font-family: 'Rouge Script', cursive;
-
+    font-size: 55px;
 }

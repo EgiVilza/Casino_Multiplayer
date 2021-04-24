@@ -1,7 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const session = require("express-session")
-const router = require("./routes/api/playersAPI")
+const router = require("./routes/api")
 const cors = require("cors")
 
 // websocket ish
@@ -41,8 +41,8 @@ mongoose
 let server = app.listen(PORT, function() {
   console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
   //console.log("")
-});
-
+});   
+ 
 
 
 
@@ -168,4 +168,4 @@ io.on('connection', function(socket){
     })
 
 
-})
+}) 
