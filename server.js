@@ -1,7 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const session = require("express-session")
-const router = require("./routes/api/playersAPI")
+const router = require("./routes/api/players")
 const cors = require("cors")
 const middleware = require("./config/middleware/jsonWebToken")
 
