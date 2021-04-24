@@ -10,6 +10,9 @@ router.route("/")
     .get(playerController.findAll)
     .post(playerController.create)
 
+router.route("/leaderboard")
+    .get(playerController.findScores)
+
 router.route("/:id")
     .get(playerController.findById)
     .put(playerController.update)
