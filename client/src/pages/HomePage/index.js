@@ -4,11 +4,11 @@ import { useAppContext } from '../../utils/AppContext'
 const HomePage = () => {
     const [state, dispatch] = useAppContext()
     // const [cards, setCards] = useState()
-    useEffect(() => {
+    useEffect(() => {/*
         state.socket.on('drawCard', (data) => {
             // setCards()
         })
-        state.socket.emit('nameSet', {playerName: 'BMAX'})
+        state.socket.emit('nameSet', {playerName: 'BMAX'})*/
     }, [])
     
     return (

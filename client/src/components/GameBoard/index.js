@@ -11,39 +11,59 @@ function handleClick(e) {
   }
 
 
+
 function GameBoard() {
 
     const [state, dispatch] = useAppContext()
-    
-let asyncArray = []
-if(typeof state.hand !== 'undefined'){
-    asyncArray = state.hand
+
+//Grabs the player object assosciated with the socket ID and names it as variable "asyncCurrentPlayer" for easier access
+
+let asyncCurrentPlayer = {}
+if(typeof state.gameState !== 'undefined'){
+    asyncCurrentPlayer = state.gameState.players.find(({id}) => id === state.socket.id)
+    }
+
+
+let asyncOtherPlayers = []
+if(typeof state.gameState !== 'undefined'){
+    asyncOtherPlayers = state.gameState.players.filter(player => player.id !== asyncCurrentPlayer.id)
+}
+
+//Renders dealer and player hands and score as empty to avoid mapping over undefined data
+
+let asyncPlayerArray = []
+if(typeof state.gameState !== 'undefined'){
+asyncCurrentPlayer.hand.forEach(element => asyncPlayerArray.push(element.image))
 }
 
 let asyncDealerArray = []
-if(typeof state.dealerHand !== 'undefined'){
-    asyncDealerArray = state.dealerHand
+if(typeof state.gameState !== 'undefined'){
+    
+state.gameState.dealer.hand.forEach(element => asyncDealerArray.push(element.image))
+}
+
+let asyncPlayerScore = 0
+if(typeof state.gameState !== 'undefined'){
+    asyncPlayerScore = asyncCurrentPlayer.score
+}
+
+let asyncDealerScore = 0
+if(typeof state.gameState !== 'undefined'){
+    asyncDealerScore = state.gameState.dealer.score
+}
+
+let asyncPlayerBank = 0
+if(typeof state.gameState !== 'undefined'){
+    asyncPlayerBank = asyncCurrentPlayer.bank
 }
 
 
 //Socket listeners
-    state.socket.on('drawCard', function(data){
-        console.log('Updog')
-        let playersHand = []
-        data.playerHand.forEach(element => playersHand.push(element.image))
-        dispatch({type: 'drawCard', currentPlayerHand: playersHand})
-        console.log(data.drawnCard.image);
+
+    state.socket.on('gameStateUpdate', function(data){
+        dispatch({type: 'gameState', gameState: data})
     })
 
-    state.socket.on('stand', function(data){
-    })
-
-    state.socket.on('dealer', function(data){
-        console.log('ligma')
-        let dealersHand = []
-        data.hand.forEach(element => dealersHand.push(element.image))
-        dispatch({type: 'dealer', currentDealerHand: dealersHand})
-    })
 
 //Button functions
     function playerHit(e) {
@@ -56,16 +76,37 @@ if(typeof state.dealerHand !== 'undefined'){
         state.socket.emit('stand', {});
       }
     
-    
-    console.log('Clock' + state.hand)
+    function joinGame(e) {
+        e.preventDefault();
+        state.socket.emit('joinGame', {});
+        dispatch({type: 'joinedGame', joinedGame: true})
+      }
+
+    function playerBet(e) {
+        e.preventDefault();
+        let betAmount = prompt('How much would you like to bet?')
+        if(betAmount < asyncPlayerBank){
+        state.socket.emit('bet', betAmount);
+      }
+    }
+
+console.log(asyncOtherPlayers)
+//Conditional rendering
+
       
     return(
         <div className="gbWrapper">
             <div className="firstCol">
                 
-                <div className="amount">Amount Left: $5,000</div>
+                <div className="amount">Amount Left: {asyncPlayerBank}</div>
+
+                <Button className="joinGame"
+                        onClick={joinGame}>
+                        Join Game
+                </Button>
+
                 <Button className="placeBet"
-                        onClick={handleClick}>
+                        onClick={playerBet}>
                         Place Bet
                 </Button>
 
@@ -79,6 +120,7 @@ if(typeof state.dealerHand !== 'undefined'){
                         onClick={playerStay}>
                         Stay
                     </Button>
+
                 </div>
 
                 <Button className="split"
@@ -97,12 +139,30 @@ if(typeof state.dealerHand !== 'undefined'){
             
 
                 <div className="handOfDealer">Dealer's Hand: {asyncDealerArray.map((card) => (
-                    <img src={`/Images/CardFaces/${card}`} alt ={card}></img>
-                ))}</div>
-
-                <div className="handOfPlayer">Player's Hand: {asyncArray.map((card) => (
                     <img src={`/Images/CardFaces/${card}`} alt ={card} height='100px'></img>
-                ))}</div>
+                ))}
+                
+                <div className="dealerScoreCard">Dealer's Score: {asyncDealerScore}
+                </div>
+
+                </div>
+               
+
+                <div className="handOfPlayer">Player's Hand: {asyncPlayerArray.map((card) => (
+                    <img src={`/Images/CardFaces/${card}`} alt ={card} height='100px'></img>
+                ))}
+                
+                <div className="playerScoreCard">Player's Score: {asyncPlayerScore}
+                
+                </div>
+                {asyncOtherPlayers.map((player) => <div>
+
+                    {player.id}'s Hand
+                    {player.hand.map((card) =>(
+                        <img src={`/Images/CardFaces/${card.image}`} alt ={card.image} height='100px'></img>))}
+
+                </div>)}
+                </div>
 
               
             </div> }

@@ -6,8 +6,7 @@ const cors = require("cors")
 
 // websocket ish
 let socket = require('socket.io')
-let cardsLogic = require('./cards.js');
-const playerController = require("./controllers/playerController");
+let cardsLogic = require('./cards.js')
 
 const app = express();
 const PORT = process.env.PORT || 8080;
@@ -46,6 +45,12 @@ let server = app.listen(PORT, function() {
 });
 
 
+
+
+
+
+
+
 //Socket set up
 
 let io = socket(server, {cors: { origin: '*'}})
@@ -59,15 +64,6 @@ testDeck.shuffle()
 let testDealer = new cardsLogic.dealer()
 //Dealer completes first turn
 testDealer.dealerTurn(testDeck)
-
-
-function newGame(){
-    let testDeck = new cardsLogic.deck()
-    testDeck.shuffle()
-    let testDealer = new cardsLogic.dealer()
-    testDealer.dealerTurn(testDeck)
-    players = []
-}
 
 //Array for storing player objects server side
 let players = []
@@ -85,64 +81,46 @@ function allStandOrBust(){
 }
 //If all players are done drawing cards, causes the dealer to perform turns until he hits 17 or busts
 function runDealer(){
+    console.log('LigmaUpdog')
+    console.log(players)
     if(allStandOrBust()){
+    console.log('Deeznuts')
     for(let z = 0; !testDealer.bust && !testDealer.stand; z++){
         testDealer.dealerTurn(testDeck)
     }
-
-//For each player compares dealer's score to player score
-//For each player clears their bet and awards to their bank the correct amount of money
-players.forEach(player => {
-    
-    if(player.score === 21){
-        player.bank = player.bank + 1.5*(player.currentBet)
-        player.currentBet = 0
+    let dealerState = {
+        score: testDealer.score,
+        hand: testDealer.hand
     }
-    if(player.bust){
-    
-        player.currentBet = 0
+    console.log('Dealer performed turn')
+    io.sockets.emit('dealer', dealerState)
     }
-    else if(testDealer.bust && !player.bust){
-        player.bank = player.bank + 2*(player.currentBet)
-        player.currentBet = 0
-    }
-    else if(testDealer.score > player.score){
-        player.currentBet = 0
-    }
-    else if(player.score === testDealer.score){
-        player.bank = player.bank + player.currentBet
-        player.currentBet = 0
-    }
-    else if(player.score > testDealer.score){
-        player.bank = player.bank + 2*(player.currentBet)
-        player.currentBet = 0
-    }
-   
-console.log(players)
-
-})
-
-    }
-    sendUpdatedGameStateToClients()
 }
 
 
-function sendUpdatedGameStateToClients(){
-
+function sendUpdatedGameStateToClients(currentPlayer){
+    let currentPlayerIndex = players.indexOf(currentPlayer)
+    let otherPlayersArray = players.slice(currentPlayerIndex, 1)
+    console.log('Boingo')
+    console.log(currentPlayer)
+    console.log(otherPlayersArray)
     let gameState = {
-        players: players,
+        currentPlayer: currentPlayer,
+        otherPlayers: otherPlayersArray,
         dealer: testDealer
     }
-    players.forEach(player => {
-        io.to(player.id).emit('gameStateUpdate', gameState)})
+    io.sockets.emit('gameStateUpdate', gameState)
 }
+
+
+
 
 
 //Websocket that fires on connection
 io.on('connection', function(socket){
 
     socket.on('joinGame', function(data){
-        console.log('Welcome!', socket.id
+        console.log('Welcome!'
         )
         let currentPlayer = players.find(({id}) => id === socket.id)
         //If there is no current player with the ID of the one connecting...
@@ -158,7 +136,14 @@ io.on('connection', function(socket){
             //Pushes new player into the players array
             players.push(currentPlayer)
     
-           sendUpdatedGameStateToClients()
+            let initialGameState = {
+                playerHand: currentPlayer.hand,
+                playerScore: currentPlayer.score,
+                dealerHand: testDealer.hand,
+                dealerScore: testDealer.score
+            }
+    
+            io.sockets.emit('startUp', initialGameState)
         }
     })
     
@@ -173,10 +158,23 @@ io.on('connection', function(socket){
         currentPlayer.drawCard(testDeck)
         cardDrawSuccessful = true 
         }
+
+        //Object that stores information about the player and game state
+        
+        let cardState = {
+            playerID: currentPlayer.id,
+            playerName: currentPlayer.name,
+            playerHand: currentPlayer.hand,
+            playerScore: currentPlayer.score,
+            playerBust: currentPlayer.bust,
+            drawSuccess: cardDrawSuccessful,
+            drawnCard: currentPlayer.hand[currentPlayer.hand.length - 1],
+            deckLength: testDeck.cards.length 
+        }
         //Runs the dealer function
         runDealer()
         //Emits the cardState object to the client
-        sendUpdatedGameStateToClients()
+        io.sockets.emit('drawCard', cardState)
     })
 
 
@@ -193,21 +191,26 @@ io.on('connection', function(socket){
         let currentPlayer = players.find(({id}) => id === socket.id)
         //Sets that player's stand attribute to 'true'
         currentPlayer.stand = true
+        //Creates an object that stores player's name and score
+        standState = {
+            playerName: currentPlayer.name,
+            playerScore: currentPlayer.score
+        }
         //Runs the dealer function
         runDealer()
         //Emits the standState object back to the client
-        sendUpdatedGameStateToClients()
+        io.sockets.emit('stand', standState)
     })
 
     //test
 
 
 //test
-    socket.on('bet', function(data){
+    socket.on('gameStateRequest', function(data){
         let currentPlayer = players.find(({id}) => id === socket.id)
-        currentPlayer.bet(parseInt(data))
-        sendUpdatedGameStateToClients()
+        console.log('bingo!')
         console.log(currentPlayer)
+        sendUpdatedGameStateToClients(currentPlayer)
     })
 
 })
