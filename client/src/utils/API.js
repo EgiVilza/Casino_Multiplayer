@@ -1,10 +1,12 @@
 import axios from 'axios';
 
+const apiURL = process.env.NODE_ENV=="development" ? "http://localhost:8080" : ""
+
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
     login(data) {
         return new Promise((resolve, reject) => {
-            axios.post("http://localhost:8080/login", data)
+            axios.post(apiURL + "/login", data)
             .then( response => {
                 // Variable for error or login messages
                 let message = {}
@@ -31,7 +33,7 @@ export default {
     },
     signup(data) {
         return new Promise((resolve, reject) => {
-            axios.post("http://localhost:8080/signup", data)
+            axios.post(apiURL + "/signup", data)
             .then( response => {
                 console.log(response)
 
@@ -51,14 +53,14 @@ export default {
         })
     },
     postToSocket(data) {
-        axios.post("http://localhost:8080/game", data)
+        axios.post(apiURL + "/game", data)
             .then( response => {
                 console.log(response)
             })
     },
     verifyToken(data) {
         return new Promise((resolve, reject) => {
-            axios.post("http://localhost:8080/game", data)
+            axios.post(apiURL + "/game", data)
             .then( response => {
                 resolve(response)
             })
@@ -76,6 +78,6 @@ export default {
         return body
     },
     getPlayers() {
-        return axios.get("http://localhost:8080/leaderboard") 
+        return axios.get(apiURL + "/leaderboard") 
       }
     }
