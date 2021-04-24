@@ -14,6 +14,8 @@ import { useAppContext } from "./utils/AppContext"
 
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
+const apiURL = process.env.NODE_ENV=="development" ? "http://localhost:8080" : ""
+
 function App() {
     console.log(useAppContext())
 
@@ -21,7 +23,7 @@ function App() {
     const [socket, setSocket] = useState(null)
     useEffect(() => 
     {
-        var socketInEffect = io('http://localhost:8080')
+        var socketInEffect = io(apiURL)
         console.log(socketInEffect)
         socketInEffect.on('connect', () =>{
             console.log(socketInEffect.id)
