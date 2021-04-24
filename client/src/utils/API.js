@@ -83,4 +83,7 @@ export default {
 
         return body
     },
-}
+    getPlayers() {
+        return axios.get("http://localhost:8080/") 
+      }
+    }

@@ -9,7 +9,7 @@ module.exports = {
     // find all the players
     findAll: function(req, res) {
         db.Player
-        .find()
+        .find().sort([['balance', -1]])
         .then(dbModel => res.json(dbModel))
         .catch(err => res.status(422).json(err))
     }, 

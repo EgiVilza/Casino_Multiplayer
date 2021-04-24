@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react"
 import "./style.css"
-import { useAppContext } from "../../utils/AppContext"
+// import { useAppContext } from "../../utils/AppContext"
 import Leaderboard from "../../components/Leaderboard"
-import API from "../../utils/API.js"
+import API from "../../utils/API"
 
 // pulling the state and the dispatch function from useAppContext
 
@@ -29,7 +29,6 @@ function LeaderBoardPage() {
     return (
         <div className="leaderWrapper">
             <Leaderboard players={state.players} />
-
         </div>
     )
 }
