@@ -7,7 +7,8 @@ const AppContext = React.createContext({
  title: "", 
  socket: null,
  hand: [],
- dealerHand: []
+ dealerHand: [],
+ isLoggedIn: false,
 });
 
 // REFERENCE UNIT 20 ACT 20******************
@@ -29,6 +30,8 @@ const reducer = (state, action) => {
         return {...state, hand: [...action.currentPlayerHand]}
       case 'dealer':
         return {...state, dealerHand: [...action.currentDealerHand]}
+      case 'isLoggedIn':
+        return {...state, "isLoggedIn": action.payload}
     default:
       throw new Error(`Invalid action type: ${action.type}`);
   }

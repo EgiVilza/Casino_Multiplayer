@@ -2,9 +2,12 @@ import React, { useRef, useState } from "react"
 import "./style.css"
 import LoginBtn from "../LoginBtn" 
 import { Link, Redirect } from "react-router-dom";
-import API from "../../utils/API"
+import API from "../../utils/API";
+import {useAppContext} from '../../utils/AppContext'
 
 function Login() {
+
+    const [state, dispatch] = useAppContext();
 
     const emailRef = useRef("")
     const passwordRef = useRef("")
@@ -41,6 +44,10 @@ function Login() {
             .then(results => {
                 setMessage(results.message)
                 setClasses(results.alert)
+                dispatch({
+                    type: 'isLoggedIn',
+                    payload: true
+                })
 
                 if (results.message === "Logged In") {
                     setIsVerified(false)
