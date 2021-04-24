@@ -18,7 +18,7 @@ function App() {
     console.log(useAppContext())
 
     console.log('hello')
-   const [socket, setSocket] = useState(null)
+    const [socket, setSocket] = useState(null)
     useEffect(() => 
     {
         var socketInEffect = io('http://localhost:8080')
@@ -41,6 +41,7 @@ function App() {
                 {socket && (
                 <AppProvider value={{socket}}>
                 <NavBar />
+                    <Route exact path="/" component={LoginPage} />
                     <Route export path="/homepage" component={HomePage} />
                     <Route export path="/server" component={CreateServerPage} />
                     <Route exact path="/game" component={GameBoardPage} />

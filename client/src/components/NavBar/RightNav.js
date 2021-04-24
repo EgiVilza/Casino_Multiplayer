@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Link } from "react-router-dom";
+import API from "../../utils/API"
 
 const Ul = styled.ul`
   list-style: none;
@@ -9,7 +10,7 @@ const Ul = styled.ul`
   li {
     padding: 18px 10px;
   }
-  @media (max-width: 768px) {
+  @media (max-width: 968px) {
     flex-flow: column nowrap;
     background-color: #0D2538;
     position: fixed;
@@ -24,28 +25,51 @@ const Ul = styled.ul`
       color: #fff;
     }
   }
+  .hidden {
+    display: none;
+  }
 `;
 
 const RightNav = ({ open }) => {
+
+  const [classes, setClasses] = useState("")
+
+  // If the user is not logged in, the game and viewgame links are hidden
+  // From the user
+  useEffect(() => {
+    API.verifyToken(API.getTokenFromLocalStorage())
+            .then(results => {
+                const message = results.data.message
+
+                if (message !== "Token Verified") {
+                    setClasses("hidden")
+                } else {
+                  setClasses("")
+                }
+            })
+            .catch(err => setClasses("hidden"));
+  }, [])
+
+
   return (
     <Ul open={open}>
-        <li>
+        {/* <li className={classes}>
             <Link 
             to="/server"
             >
               Create Server
              </Link>
-        </li>
-        <li>
+        </li> */}
+        <li className={classes}>
             <Link 
             to="/game"
             >
              Black Jack
              </Link>
         </li>
-        <li>
+        <li className={classes}>
             <Link 
-            to="/viewgame"
+            to="/viewgame"          
             >
               View Game
              </Link>

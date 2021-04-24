@@ -1,26 +1,34 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import "./style.css"
-import { useAppContext } from "../../utils/AppContext"
+// import { useAppContext } from "../../utils/AppContext"
+import Leaderboard from "../../components/Leaderboard"
+import API from "../../utils/API"
 
 // pulling the state and the dispatch function from useAppContext
 
 function LeaderBoardPage() {
-    const [ state, dispatch ] = useAppContext()
+    // const [state, dispatch] = useAppContext()
+    const [state, setState] = useState({ players: [] })
 
     // setting the original title to Leader Board
     useEffect(() => {
-        dispatch({
-            type: "changeTitle",
-            title: "Leader Board"
-        })
-    }, [] )
+    //     dispatch({
+    //         type: "changeTitle",
+    //         title: "Leader Board"
+    //     })
+    // Get player data to show scores
+        API.getPlayers()
+        .then(res => {
+            setState({ players: res.data });
+            console.log(state.players);
 
-    return(
+        })
+        .catch(err => console.log(err));
+    }, [])
+
+    return (
         <div className="leaderWrapper">
-            {/* use props later*/}
-            <div className="number">#: </div>
-            <div className="username">Username: </div>
-            <div className="score">Score/Bet: </div>
+            <Leaderboard players={state.players} />
         </div>
     )
 }

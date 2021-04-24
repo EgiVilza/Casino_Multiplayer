@@ -8,7 +8,7 @@ import { useAppContext } from '../../utils/AppContext'
 function handleClick(e) {
     e.preventDefault();
     console.log('The link was clicked.');
-  }
+}
 
 
 

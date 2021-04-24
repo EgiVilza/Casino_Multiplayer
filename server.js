@@ -1,15 +1,16 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const session = require("express-session")
-const router = require("./routes/api/playersAPI")
+const router = require("./routes/api/players")
 const cors = require("cors")
+const middleware = require("./config/middleware/jsonWebToken")
 
 // websocket ish
 let socket = require('socket.io')
 let cardsLogic = require('./cards.js');
 const playerController = require("./controllers/playerController");
 
-const app = express();
+const app = express("*");
 const PORT = process.env.PORT || 8080;
 
 // Define middleware here
@@ -20,7 +21,6 @@ app.use(express.json());
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
-
 
 //Requiring routes
 app.use(cors())
@@ -35,14 +35,19 @@ app.use(session({
 
 // Connect to the Mongo DB
 mongoose
-    .connect(process.env.MONGODB_URI || "mongodb://localhost/blackJackDB")
+    .connect(process.env.MONGODB_URI || "mongodb://localhost/blackJackDB",
+    {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        useCreateIndex: true,
+        useFindAndModify: false
+    })
     .then(() => console.log("MongoDB Connected..."))
     .catch(err => console.log(err))
 
 // Start the API server
 let server = app.listen(PORT, function() {
   console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
-  //console.log("")
 });
 
 
@@ -63,6 +68,7 @@ class gameRound {
       this.players = players;
     }}
 
+//Socket set up
 
 //Creates a game round on startup
 

@@ -7,16 +7,27 @@ import { Link } from "react-router-dom";
 
 const Nav = styled.nav`
   background-color: white;
+  opacity: 0.75;
   width: 100%;
   height: 55px;
-  border-bottom: 2px solid #f1f1f1;
   padding: 0 20px;
   display: flex;
   justify-content: space-between;
   .logo {
     font-family: 'Rouge Script', cursive;
     font-size: 40px;
-    color: green;
+  }
+  a {
+    color: red;
+  }
+  .navTitle {
+    margin: auto;
+  }
+
+  @media (max-width: 400px) {
+    .navTitle {
+      visibility: hidden;
+    }
   }
 `
 
@@ -26,14 +37,15 @@ function Navbar() {
 
   return (
     <Nav>
-      <div className="logo">
+      <div>
         <Link
           to="/homepage"
+          className="logo"
           >
           Home
         </Link>
       </div>
-      <h1>{state.title} </h1>
+      <h1 className="navTitle"> {state.title} </h1>
       <Burger />
     </Nav>
   )
