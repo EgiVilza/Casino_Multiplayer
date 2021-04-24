@@ -1,7 +1,7 @@
 import React, { useRef, useState }  from "react"
 import "./style.css"
 import SignUpBtn from "../SignUpBtn" 
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import API from "../../utils/API"
 
 function Signup() {
@@ -12,6 +12,9 @@ function Signup() {
 
     const [message, setMessage] = useState("")
     const [classes, setClasses] = useState("")
+
+    // Check if token is verified
+    const [isVerified, setIsVerified] = useState(true)
 
     const onSubmit = (e) => {
         e.preventDefault()
@@ -54,7 +57,7 @@ function Signup() {
                 setClasses(results.alert)
 
                 if (results.message === "Account Created") {
-                    window.location = "/login"
+                    setIsVerified(false)
                 }
             })
             .catch(err => console.log(err));
@@ -64,6 +67,7 @@ function Signup() {
 
     return(
         <div className="signupWrapper">
+            {!isVerified ? <Redirect to="/login" /> : ""}
             {/* change to props later amigo */}
             <h1 className="signup">Signup For Free</h1>
 
