@@ -9,6 +9,9 @@ const AppContext = React.createContext({
  hand: [],
  dealerHand: [],
  isLoggedIn: false,
+ joinedGame: false,
+ gameState: {},
+ clientID: ""
 });
 
 // REFERENCE UNIT 20 ACT 20******************
@@ -21,7 +24,8 @@ const { Provider } = AppContext
 const reducer = (state, action) => {
   switch(action.type) {
     // if action.type = changeTitle
-    case "changeTitle":
+    
+      case "changeTitle":
       // grab the state, change title from the state to acttion.title
       return { ...state, title: action.title}
     case "setSocket":
@@ -31,7 +35,19 @@ const reducer = (state, action) => {
       case 'dealer':
         return {...state, dealerHand: [...action.currentDealerHand]}
       case 'isLoggedIn':
-        return {...state, "isLoggedIn": action.payload}
+        return {...state, "isLoggedIn": action.payload }
+      
+      case "setSocket":
+        return { ...state, socket: action.socket }
+
+      case "clientID":
+       return { ...state, clientID: action.clientID}
+
+      case 'joinedGame':
+        return {...state, joinedGame: action.joinedGame}
+
+      case 'gameState':
+        return {...state, gameState: action.gameState}
     default:
       throw new Error(`Invalid action type: ${action.type}`);
   }
