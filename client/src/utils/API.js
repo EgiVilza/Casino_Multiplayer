@@ -84,6 +84,6 @@ export default {
         return body
     },
     getPlayers() {
-        return axios.get("http://localhost:8080/") 
+        return axios.get("http://localhost:8080/leaderboard") 
       }
     }
