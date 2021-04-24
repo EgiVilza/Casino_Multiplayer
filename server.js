@@ -34,7 +34,13 @@ app.use(session({
 
 // Connect to the Mongo DB
 mongoose
-    .connect(process.env.MONGODB_URI || "mongodb://localhost/blackJackDB")
+    .connect(process.env.MONGODB_URI || "mongodb://localhost/blackJackDB",
+    {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        useCreateIndex: true,
+        useFindAndModify: false
+    })
     .then(() => console.log("MongoDB Connected..."))
     .catch(err => console.log(err))
 
