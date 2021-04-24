@@ -26,7 +26,7 @@ if(typeof state.gameState !== 'undefined'){
 
 let asyncOtherPlayers = []
 if(typeof state.gameState !== 'undefined'){
-    asyncOtherPlayers = state.gameState.players.filter(player => player.id !== asyncCurrentPlayer.id)
+    asyncOtherPlayers = state.gameState.players.filter(player => player.id !== state.socket.id)
 }
 
 //Renders dealer and player hands and score as empty to avoid mapping over undefined data
@@ -157,7 +157,7 @@ console.log(asyncOtherPlayers)
                 </div>
                 {asyncOtherPlayers.map((player) => <div>
 
-                    {player.id}'s Hand
+                    {player.id}'s Hand: 
                     {player.hand.map((card) =>(
                         <img src={`/Images/CardFaces/${card.image}`} alt ={card.image} height='100px'></img>))}
 
