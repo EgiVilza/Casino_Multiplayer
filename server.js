@@ -182,8 +182,9 @@ io.on('connection', function(socket){
     
     socket.on('disconnect', function(data){
         let currentPlayer = currentGameRound.players.find(({id}) => id === socket.id)
+        if(typeof currentPlayer !== 'undefined' ){
         currentGameRound.players = currentGameRound.players.filter(player => player.id !== currentPlayer.id)
-        sendUpdatedGameStateToClients()
+        sendUpdatedGameStateToClients()}
     })
     
     //Listens for a card draw request from client

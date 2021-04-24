@@ -50,7 +50,7 @@ const RightNav = ({ open }) => {
                     type: 'isLoggedIn',
                     payload: false
                   })
-                    setClasses("hidden")
+                    //setClasses("hidden")
                 } else {
                   dispatch({
                     type: 'isLoggedIn',
