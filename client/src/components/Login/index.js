@@ -12,6 +12,9 @@ function Login() {
     const [message, setMessage] = useState("")
     const [classes, setClasses] = useState("")
 
+    // Check if token is verified
+    const [isVerified, setIsVerified] = useState(true)
+
     const onSubmit = (e) => {
         e.preventDefault()
 
@@ -40,8 +43,7 @@ function Login() {
                 setClasses(results.alert)
 
                 if (results.message === "Logged In") {
-                    //window.location = "/viewgame";
-                    <Redirect to="/viewgame" />
+                    setIsVerified(false)
                 }
             })
             .catch(err => console.log(err));
@@ -49,6 +51,7 @@ function Login() {
 
     return(
         <div className="loginWrapper">
+            {!isVerified ? <Redirect to="/viewgame" /> : ""}
             {/* change to props later amigo */}
             <h1 className="signup">Login to Account</h1>
 
@@ -71,7 +74,7 @@ function Login() {
             </form>
 
             <p className={`message` + classes} role="alert">{message}</p>
-
+    
         </div>
     )
 }

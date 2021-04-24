@@ -24,8 +24,6 @@ export default {
                 // Store Token in local storage
                 localStorage.setItem("CasinoToken", token)
 
-                this.viewgame(this.getTokenFromLocalStorage())
-
                 resolve(message)
             })
             .catch(err => reject(err))
@@ -52,12 +50,6 @@ export default {
             .catch(err => reject(err))
         })
     },
-    viewgame(data) {
-        axios.post("http://localhost:8080/viewgame", data)
-            .then( response => {
-                console.log(response)
-            })
-    },
     postToSocket(data) {
         axios.post("http://localhost:8080/game", data)
             .then( response => {
@@ -68,7 +60,7 @@ export default {
         return new Promise((resolve, reject) => {
             axios.post("http://localhost:8080/game", data)
             .then( response => {
-                console.log(response)
+                resolve(response)
             })
             .catch(err => reject(err))
         })
