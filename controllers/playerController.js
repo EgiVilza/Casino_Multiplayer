@@ -69,7 +69,7 @@ module.exports = {
         if(err) {
           res.sendStatus(404)
         } else {
-          res.send({ message: "post created", authData})
+          res.send({ message: "Token Verified", authData})
         }
       })
     },

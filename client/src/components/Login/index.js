@@ -1,9 +1,8 @@
 import React, { useRef, useState } from "react"
 import "./style.css"
 import LoginBtn from "../LoginBtn" 
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import API from "../../utils/API"
-import ViewGamePage from "../../pages/ViewGamePage"
 
 function Login() {
 
@@ -27,16 +26,23 @@ function Login() {
             return
         } 
 
+        // Store email and password in an object
         const data = {
                     email: emailRef.current.value, 
                     password: passwordRef.current.value
                 }
 
         // Attempt to login and recieve an alert message
+        // When logged in, redirect to game page
         API.login(data)
             .then(results => {
                 setMessage(results.message)
                 setClasses(results.alert)
+
+                if (results.message === "Logged In") {
+                    //window.location = "/viewgame";
+                    <Redirect to="/viewgame" />
+                }
             })
             .catch(err => console.log(err));
     }
