@@ -2,7 +2,7 @@ import React from "react"
 import "./style.css"
 
 function Leaderboard(props) {
-    
+    console.log(props.players);
     let j = 1;
     const checkTie = [];
     for (const i of props.players) {

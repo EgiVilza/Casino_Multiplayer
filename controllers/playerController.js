@@ -9,10 +9,18 @@ module.exports = {
     // find all the players
     findAll: function(req, res) {
         db.Player
-        .find().sort([['balance', -1]])
+        .find()
         .then(dbModel => res.json(dbModel))
         .catch(err => res.status(422).json(err))
     }, 
+    //find scores and player names for leaderboard
+    findScores: function(req, res) {
+      db.Player
+      .find({}, {balance: 1, username: 1})
+      .sort([['balance', -1]])
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err))
+  }, 
     // create a player
     create: function(req, res) {
       let {email, username, password} = req.body

@@ -10,11 +10,13 @@ import LoginPage from "./pages/LoginPage"
 import HomePage from "./pages/HomePage"
 import { AppProvider } from "./utils/AppContext"
 import {io} from "socket.io-client"
-
+import { useAppContext } from "./utils/AppContext"
 
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
 function App() {
+    console.log(useAppContext())
+
     console.log('hello')
     const [socket, setSocket] = useState(null)
     useEffect(() => 
@@ -22,6 +24,8 @@ function App() {
         var socketInEffect = io('http://localhost:8080')
         console.log(socketInEffect)
         socketInEffect.on('connect', () =>{
+            console.log(socketInEffect.id)
+
             console.log('Setting socket!')
             setSocket(socketInEffect)
 
