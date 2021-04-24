@@ -1,10 +1,10 @@
 import React from "react"
 import "./style.css"
 
-function Leaderboard() {
+function Leaderboard(props) {
 
     return (
-        <table class="table">
+        <table className="table">
             <thead>
                 <tr>
                     <th scope="col">#</th>
@@ -13,22 +13,16 @@ function Leaderboard() {
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                </tr>
-            </tbody>
+          {props.players.map(result => (
+            <tr key={result.id}>
+              <th scope="row">{result.place}</th>
+              <td>{result.username}</td>
+              <td>{result.balance}</td>
+            </tr>
+          ))}
+
+        </tbody>
+
         </table>
     )
 }
