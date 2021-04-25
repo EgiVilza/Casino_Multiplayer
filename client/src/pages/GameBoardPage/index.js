@@ -24,12 +24,16 @@ function GameBoardPage() {
                 const message = results.data.message
 
                 if (message !== "Token Verified") {
+                    dispatch({type: 'isLoggedIn', payload:"hidden"})
                     setIsVerified(false)
                 }
             })
-            .catch(err => setIsVerified(false));
+            .catch(err => {
+                dispatch({type: 'isLoggedIn', payload:"hidden"})
+                setIsVerified(false)
+            })
 
-    }, [] )
+    }, [])
 
     return(
         <div className="gbPageWrapper">

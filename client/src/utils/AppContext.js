@@ -8,7 +8,7 @@ const AppContext = React.createContext({
  socket: null,
  hand: [],
  dealerHand: [],
- isLoggedIn: false,
+ isLoggedIn: "hidden",
  joinedGame: false,
  gameState: {},
  clientID: ""
@@ -28,17 +28,17 @@ const reducer = (state, action) => {
       case "changeTitle":
       // grab the state, change title from the state to acttion.title
       return { ...state, title: action.title}
-    case "setSocket":
-      return { ...state, socket: action.socket}
+      case "setSocket":
+        return { ...state, socket: action.socket}
       case 'drawCard':
         return {...state, hand: [...action.currentPlayerHand]}
       case 'dealer':
         return {...state, dealerHand: [...action.currentDealerHand]}
       case 'isLoggedIn':
-        return {...state, "isLoggedIn": action.payload }
+        return {...state, isLoggedIn: action.payload }
       
-      case "setSocket":
-        return { ...state, socket: action.socket }
+      // case "setSocket":
+      //   return { ...state, socket: action.socket }
 
       case "clientID":
        return { ...state, clientID: action.clientID}

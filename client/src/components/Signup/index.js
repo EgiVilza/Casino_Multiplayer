@@ -14,7 +14,7 @@ function Signup() {
     const [classes, setClasses] = useState("")
 
     // Check if token is verified
-    const [isVerified, setIsVerified] = useState(true)
+    const [isVerified, setIsVerified] = useState(false)
 
     const onSubmit = (e) => {
         e.preventDefault()
@@ -53,21 +53,26 @@ function Signup() {
         // When signed up, redirect to login page
         API.signup(data)
             .then(results => {
-                setMessage(results.message)
+                if (results.message === "Account Created") {
+                    setMessage(results.message + ": Redirecting to login page...")
+                } else {
+                    setMessage(results.message)
+                }
                 setClasses(results.alert)
 
-                if (results.message === "Account Created") {
-                    setIsVerified(false)
-                }
+                setTimeout(() => {
+                    if (results.message === "Account Created") {
+                        setIsVerified(true)
+                    }
+                  }, 3000);
             })
             .catch(err => console.log(err));
-
     }
         
 
     return(
         <div className="signupWrapper">
-            {!isVerified ? <Redirect to="/login" /> : ""}
+            {isVerified ? <Redirect to="/login" /> : ""}
             {/* change to props later amigo */}
             <h1 className="signup">Signup For Free</h1>
 

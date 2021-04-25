@@ -16,7 +16,7 @@ function Login() {
     const [classes, setClasses] = useState("")
 
     // Check if token is verified
-    const [isVerified, setIsVerified] = useState(true)
+    const [isVerified, setIsVerified] = useState(false)
 
     const onSubmit = (e) => {
         e.preventDefault()
@@ -42,23 +42,28 @@ function Login() {
         // When logged in, redirect to game page
         API.login(data)
             .then(results => {
-                setMessage(results.message)
+                setMessage(results.message + ": Redirecting to game page...")
                 setClasses(results.alert)
-                dispatch({
-                    type: 'isLoggedIn',
-                    payload: true
-                })
 
-                if (results.message === "Logged In") {
-                    setIsVerified(false)
-                }
+                setTimeout(() => {
+                    if (results.message === "Logged In") {
+                        dispatch({
+                            type: 'isLoggedIn',
+                            payload: ""
+                        })
+                        setIsVerified(true)
+                    }
+                  }, 3000);
+
             })
             .catch(err => console.log(err));
     }
 
     return(
         <div className="loginWrapper">
-            {!isVerified ? <Redirect to="/viewgame" /> : ""}
+            {/* If token is verified, then redirect to viewgame page */}
+            {isVerified ? <Redirect to="/viewgame" /> : ""}
+
             {/* change to props later amigo */}
             <h1 className="signup">Login to Account</h1>
 

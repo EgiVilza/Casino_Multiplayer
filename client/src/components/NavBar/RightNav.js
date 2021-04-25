@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { Link } from "react-router-dom";
 import API from "../../utils/API"
@@ -35,32 +35,26 @@ const RightNav = ({ open }) => {
 
   const [state, dispatch] = useAppContext();
 
-  const [classes, setClasses] = useState("")
-
   // If the user is not logged in, the game and viewgame links are hidden
   // From the user
   useEffect(() => {
     API.verifyToken(API.getTokenFromLocalStorage())
             .then(results => {
                 const message = results.data.message
-                console.log(message)
 
                 if (message !== "Token Verified") {
                   dispatch({
                     type: 'isLoggedIn',
-                    payload: false
+                    payload: "hidden"
                   })
-                    //setClasses("hidden")
                 } else {
                   dispatch({
                     type: 'isLoggedIn',
-                    payload: true
+                    payload: ""
                   })
-                  setClasses("")
-
                 }
             })
-            .catch(err => setClasses("hidden"));
+            .catch(err => dispatch({type: 'isLoggedIn', payload:"hidden"}));
   }, [])
 
 
@@ -73,19 +67,19 @@ const RightNav = ({ open }) => {
               Create Server
              </Link>
         </li> */}
-        <li className={classes}>
-            {state.isLoggedIn && <Link 
+        <li className={state.isLoggedIn}>
+            <Link 
             to="/game"
             >
              Black Jack
-             </Link>}
+             </Link>
         </li>
-        <li className={classes}>
-            {state.isLoggedIn && <Link 
+        <li className={state.isLoggedIn}>
+            <Link 
             to="/viewgame"          
             >
               View Game
-             </Link>}
+             </Link>
         </li>
         <li>
             <Link 

@@ -34,7 +34,6 @@ function App() {
     })
     socketInEffect.on('error', () => { console.log('erroring out')})
     }, [])
-            
 
 
     return (

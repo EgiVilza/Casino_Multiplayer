@@ -52,12 +52,6 @@ export default {
             .catch(err => reject(err))
         })
     },
-    postToSocket(data) {
-        axios.post(apiURL + "/game", data)
-            .then( response => {
-                console.log(response)
-            })
-    },
     verifyToken(data) {
         return new Promise((resolve, reject) => {
             axios.post(apiURL + "/game", data)

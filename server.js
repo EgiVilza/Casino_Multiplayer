@@ -3,7 +3,6 @@ const mongoose = require("mongoose");
 const session = require("express-session")
 const router = require("./routes/api/players")
 const cors = require("cors")
-const middleware = require("./config/middleware/jsonWebToken")
 
 // websocket ish
 let socket = require('socket.io')
