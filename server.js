@@ -165,7 +165,7 @@ io.on('connection', function(socket){
         if (!currentPlayer) {
     
             //Creates new player, using their socket ID as their name
-            currentPlayer = new cardsLogic.player(socket.id, 'defaultPlayerName', 1000)
+            currentPlayer = new cardsLogic.player(socket.id, data.username, 1000)
     
             //Causes player to immediately draw two cards for their initial hand
             currentPlayer.drawCard(currentGameRound.deck)

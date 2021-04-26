@@ -42,7 +42,13 @@ function Login() {
         // When logged in, redirect to game page
         API.login(data)
             .then(results => {
-                setMessage(results.message + ": Redirecting to game page...")
+
+                if (results.message === "Logged In") {
+                    setMessage(results.message + ": Redirecting to game page...")
+                } else {
+                    setMessage(results.message)
+                }
+                
                 setClasses(results.alert)
 
                 setTimeout(() => {
@@ -60,13 +66,13 @@ function Login() {
                   }, 3000);
 
             })
-            .catch(err => console.log(err));
+            .catch(err => setMessage(err));
     }
 
     return(
         <div className="loginWrapper">
             {/* If token is verified, then redirect to viewgame page */}
-            {isVerified ? <Redirect to="/viewgame" /> : ""}
+            {isVerified ? <Redirect to="/game" /> : ""}
 
             {/* change to props later amigo */}
             <h1 className="signup">Login to Account</h1>

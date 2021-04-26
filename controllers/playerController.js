@@ -57,13 +57,14 @@ module.exports = {
         .catch(err => res.status(422).json(err));
     },
     // login to account and create a token
+    // checkback
     isLoggedIn: function(req, res) {
       let {email, password} = req.body
       db.Player.findOne({email}).then((player) => {
         bcrypt.compare(password, player.password, function(err, result) {
           if(result) {
             jwt.sign({ result }, "casinokey", { expiresIn: "1h"} , (err, token) => {
-              res.send({ token , message: "Account Logged In"})
+              res.send({ token , message: "Account Logged In", username: player.username})
             })
           } else {
             res.send({ message: "Invalid Login" })

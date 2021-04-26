@@ -8,6 +8,7 @@ export default {
         return new Promise((resolve, reject) => {
             axios.post(apiURL + "/login", data)
             .then( response => {
+                console.log(response)
                 // Variable for error or login messages
                 let message = {}
 
@@ -22,6 +23,10 @@ export default {
                 // Store token in a variable
                 const tokenStringify = JSON.stringify(response.data.token)
                 const token = tokenStringify.substring(1).slice(0,-1)
+
+                // Store username in localstorage
+                const username = response.data.username
+                localStorage.setItem("CasinoUsername", username)
 
                 // Store Token in local storage
                 localStorage.setItem("CasinoToken", token)
