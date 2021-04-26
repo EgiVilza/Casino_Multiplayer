@@ -51,6 +51,10 @@ function Login() {
                             type: 'isLoggedIn',
                             payload: ""
                         })
+                        dispatch({
+                            type: 'isLoggedOut',
+                            payload: "hidden"
+                        })
                         setIsVerified(true)
                     }
                   }, 3000);

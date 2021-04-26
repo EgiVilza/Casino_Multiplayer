@@ -7,7 +7,7 @@ function SignUpBtn() {
         <div className="signUpBtnWrapper">
             {/* make this own component */}
             <Button 
-                className="signup"
+                className="signup btn btn-primary"
                 >
                 Sign Up
             </Button>

@@ -5,8 +5,8 @@ import Button from "../Button"
 function LoginBtn() {
     return(
         <div className="LoginBtnWrapper">
-            <Button 
-                className="login">
+            <Button
+                className="login btn btn-primary">
                 Login
             </Button>
         </div>

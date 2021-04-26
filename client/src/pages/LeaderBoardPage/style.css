@@ -5,7 +5,8 @@
     border-style:solid;
     margin: 4em;
     background-color: white;
-
+    position: relative;
+    z-index: -1;
 }
 thead {
     font-family: 'Rouge Script', cursive;

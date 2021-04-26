@@ -14,7 +14,7 @@ import { useAppContext } from "./utils/AppContext"
 
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
-const apiURL = process.env.NODE_ENV=="development" ? "http://localhost:8080" : ""
+const apiURL = process.env.NODE_ENV==="development" ? "http://localhost:8080" : ""
 
 function App() {
     console.log(useAppContext())
