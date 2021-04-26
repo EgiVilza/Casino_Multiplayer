@@ -62,7 +62,7 @@ module.exports = {
       db.Player.findOne({email}).then((player) => {
         bcrypt.compare(password, player.password, function(err, result) {
           if(result) {
-            jwt.sign({ result }, "casinokey", { expiresIn: "30000"} , (err, token) => {
+            jwt.sign({ result }, "casinokey", { expiresIn: "1h"} , (err, token) => {
               res.send({ token , message: "Account Logged In"})
             })
           } else {
