@@ -9,6 +9,7 @@ const AppContext = React.createContext({
  hand: [],
  dealerHand: [],
  isLoggedIn: "hidden",
+ isLoggedOut: "",
  joinedGame: false,
  gameState: {},
  clientID: ""
@@ -36,9 +37,8 @@ const reducer = (state, action) => {
         return {...state, dealerHand: [...action.currentDealerHand]}
       case 'isLoggedIn':
         return {...state, isLoggedIn: action.payload }
-      
-      // case "setSocket":
-      //   return { ...state, socket: action.socket }
+      case "isLoggedOut":
+        return { ...state, isLoggedOut: action.payload }
 
       case "clientID":
        return { ...state, clientID: action.clientID}

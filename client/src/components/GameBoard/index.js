@@ -100,35 +100,35 @@ console.log(asyncOtherPlayers)
                 
                 <div className="amount">Amount Left: {asyncPlayerBank}</div>
 
-                <Button className="joinGame"
+                <Button className="joinGame btn btn-success"
                         onClick={joinGame}>
                         Join Game
                 </Button>
 
-                <Button className="placeBet"
+                <Button className="placeBet btn btn-primary"
                         onClick={playerBet}>
                         Place Bet
                 </Button>
 
                 <div className="innerDiv">
-                    <Button className="hit"
+                    <Button className="hit btn btn-danger"
                         onClick={playerHit}>
                         Hit
                     </Button>
 
-                    <Button className="stay"
+                    <Button className="stay btn btn-danger"
                         onClick={playerStay}>
                         Stay
                     </Button>
 
                 </div>
 
-                <Button className="split"
+                <Button className="split btn btn-danger"
                     onClick={handleClick}>
                     Split
                 </Button>
 
-                <Button className="subScore"
+                <Button className="subScore btn btn-warning"
                     onClick={handleClick}>
                     Submit Score
                 </Button>

@@ -5,6 +5,12 @@
     margin: 3em;
 }
 
+@media only screen and (max-width: 600px) {
+    .gbWrapper {
+        grid-template-columns: repeat(1, 1fr);
+    } 
+}  
+
 .firstCol {
     display: grid;
     gap: 1em;

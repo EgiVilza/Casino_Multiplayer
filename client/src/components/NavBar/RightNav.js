@@ -42,21 +42,48 @@ const RightNav = ({ open }) => {
             .then(results => {
                 const message = results.data.message
 
+                // If not logged in, blackjack and viewgame links
+                // Else hide the signup and login links 
                 if (message !== "Token Verified") {
                   dispatch({
                     type: 'isLoggedIn',
                     payload: "hidden"
+                  })
+                  dispatch({
+                    type: 'isLoggedOut',
+                    payload: ""
                   })
                 } else {
                   dispatch({
                     type: 'isLoggedIn',
                     payload: ""
                   })
+                  dispatch({
+                    type: 'isLoggedOut',
+                    payload: "hidden"
+                  })
                 }
             })
-            .catch(err => dispatch({type: 'isLoggedIn', payload:"hidden"}));
+            .catch(err => {
+              dispatch({type: 'isLoggedIn', payload:"hidden"})
+              dispatch({type: 'isLoggedOut', payload:""})
+            });
   }, [])
 
+  function signout() {
+    // Reset Token
+    localStorage.setItem("CasinoToken","")
+
+    // Log out, hide game links and reveal signout/login links
+    dispatch({
+      type: "isLoggedIn",
+      payload: "hidden"
+    })
+    dispatch({
+      type: "isLoggedOut",
+      payload: ""
+    })
+  }
 
   return (
     <Ul open={open}>
@@ -88,18 +115,26 @@ const RightNav = ({ open }) => {
               Leader Board
              </Link>
         </li>
-        <li>
+        <li className={state.isLoggedOut}>
             <Link 
             to="/signup"
             >
               Sign Up
              </Link>
         </li>
-        <li>
+        <li className={state.isLoggedOut}>
             <Link 
             to="/login"
             >
               Login
+             </Link>
+        </li>
+        <li className={state.isLoggedIn}>
+            <Link 
+            to="/login"
+            onClick={signout}
+            >
+              Sign Out
              </Link>
         </li>
     </Ul>
