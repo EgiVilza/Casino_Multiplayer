@@ -1,4 +1,4 @@
-import React from "react"
+import React, {useState} from "react"
 import "./style.css"
 import Button from "../Button"
 import { useAppContext } from '../../utils/AppContext'
@@ -64,29 +64,64 @@ if(typeof state.gameState !== 'undefined'){
         dispatch({type: 'gameState', gameState: data})
     })
 
+    // Disable button states
+    const [disableJoinGame, setDisableJoinGame] = useState("")
+    const [disablePlaceBet, setDisablePlaceBet] = useState("")
+    const [disableHitStay, setDisableHitStay] = useState("")
+    const [disableSplit, setDisableSplit] = useState("")
+    const [disableSubmitScore, setDisableSubmitScore] = useState("")
 
 //Button functions
     function playerHit(e) {
         e.preventDefault();
+
+        // if (disableHitStay === "disabled") {
+        //     return
+        // }
+
         state.socket.emit('drawCard', {});
+
+        // If round is over, enable place bet and submit score buttons
+        // and disable hit and stay buttons
+        // else do nothing
+
       }
 
     function playerStay(e) {
         e.preventDefault();
         state.socket.emit('stand', {});
+
+        // Disable/Enable buttons
+        // setDisableHitStay("disabled")
+        // setDisableSubmitScore("")
+        // setDisablePlaceBet("")
       }
     
     function joinGame(e) {
         e.preventDefault();
-        state.socket.emit('joinGame', {});
+        const username = localStorage.getItem("CasinoUsername")
+        state.socket.emit('joinGame', {username});
         dispatch({type: 'joinedGame', joinedGame: true})
+
+        // Disable/Enable buttons
+        // setDisableJoinGame("disabled")
+        // setDisablePlaceBet("")
       }
 
     function playerBet(e) {
         e.preventDefault();
+
+        // if (disablePlaceBet === "disabled") {
+        //     return
+        // }
+
         let betAmount = prompt('How much would you like to bet?')
         if(betAmount < asyncPlayerBank){
         state.socket.emit('bet', betAmount);
+
+        // Disable/Enable buttons
+        setDisablePlaceBet("disabled")
+        setDisableHitStay("")
       }
     }
 
@@ -100,35 +135,35 @@ console.log(asyncOtherPlayers)
                 
                 <div className="amount">Amount Left: {asyncPlayerBank}</div>
 
-                <Button className="joinGame btn btn-success"
+                <Button className={"joinGame btn btn-success " + disableJoinGame}
                         onClick={joinGame}>
                         Join Game
                 </Button>
 
-                <Button className="placeBet btn btn-primary"
+                <Button className={"placeBet btn btn-primary " + disablePlaceBet}
                         onClick={playerBet}>
                         Place Bet
                 </Button>
 
                 <div className="innerDiv">
-                    <Button className="hit btn btn-danger"
+                    <Button className={"hit btn btn-danger " + disableHitStay}
                         onClick={playerHit}>
                         Hit
                     </Button>
 
-                    <Button className="stay btn btn-danger"
+                    <Button className={"stay btn btn-danger " + disableHitStay}
                         onClick={playerStay}>
                         Stay
                     </Button>
 
                 </div>
 
-                <Button className="split btn btn-danger"
+                <Button className={"split btn btn-danger " + disableSplit}
                     onClick={handleClick}>
                     Split
                 </Button>
 
-                <Button className="subScore btn btn-warning"
+                <Button className={"subScore btn btn-warning " + disableSubmitScore}
                     onClick={handleClick}>
                     Submit Score
                 </Button>
@@ -157,7 +192,7 @@ console.log(asyncOtherPlayers)
                 </div>
                 {asyncOtherPlayers.map((player) => <div>
 
-                    {player.id}'s Hand: 
+                    {player.name}'s Hand: 
                     {player.hand.map((card) =>(
                         <img src={`/Images/CardFaces/${card.image}`} alt ={card.image} height='100px'></img>))}
 

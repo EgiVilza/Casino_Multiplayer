@@ -8,11 +8,11 @@ const AppContext = React.createContext({
  socket: null,
  hand: [],
  dealerHand: [],
- isLoggedIn: "hidden",
+ isLoggedIn: "",
  isLoggedOut: "",
  joinedGame: false,
  gameState: {},
- clientID: ""
+ clientID: "",
 });
 
 // REFERENCE UNIT 20 ACT 20******************

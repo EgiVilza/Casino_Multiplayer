@@ -25,11 +25,13 @@ function GameBoardPage() {
 
                 if (message !== "Token Verified") {
                     dispatch({type: 'isLoggedIn', payload:"hidden"})
+                    dispatch({type: 'isLoggedOut', payload: ""})
                     setIsVerified(false)
                 }
             })
             .catch(err => {
                 dispatch({type: 'isLoggedIn', payload:"hidden"})
+                dispatch({type: 'isLoggedOut', payload: ""})
                 setIsVerified(false)
             })
 

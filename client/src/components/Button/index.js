@@ -1,5 +1,16 @@
 import React from "react"
 
+function Button({type = "default", className, children, onClick}) {
+    return (
+        <button onClick={onClick} className={`btn btn-${type} ${className}`}>
+            {children}
+        </button>
+    )
+}
+
+export default Button
+
+
 
 // function Button({type = "default", className, children, onClick})
 // function Button(props, {className}) {
@@ -11,13 +22,3 @@ import React from "react"
 //         </button>
 //     )
 // }
-
-function Button({type = "default", className, children, onClick}) {
-    return (
-        <button onClick={onClick} className={`btn btn-${type} ${className}`}>
-            {children}
-        </button>
-    )
-}
-
-export default Button
