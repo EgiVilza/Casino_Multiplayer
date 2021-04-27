@@ -84,7 +84,7 @@ const RightNav = ({ open }) => {
       payload: ""
     })
 
-    
+    // state.socket.emit("disconnect")
   }
 
   return (

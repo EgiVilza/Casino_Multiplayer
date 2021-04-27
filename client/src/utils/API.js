@@ -8,16 +8,15 @@ export default {
         return new Promise((resolve, reject) => {
             axios.post(apiURL + "/login", data)
             .then( response => {
-                console.log(response)
                 // Variable for error or login messages
                 let message = {}
 
                 //If login is not valid, set "Invalid Login" message, else set "Logged In"
-                if (response.data.message === "Invalid Login") {
-                    message = { message: "Invalid Login", alert: " alert alert-danger"}
+                if (response.data.message !== "Account Logged In") {
+                    message = { message: response.data.message, alert: " alert alert-danger"}
                     resolve(message)
                 } else {
-                    message = { message: "Logged In", alert: " alert alert-success"}
+                    message = { message: "Logged In: Redirecting to game page...", alert: " alert alert-success"}
                 }
 
                 // Store token in a variable
@@ -40,8 +39,6 @@ export default {
         return new Promise((resolve, reject) => {
             axios.post(apiURL + "/signup", data)
             .then( response => {
-                console.log(response)
-
                 // Variable for error or login messages
                 let message = {}
 
@@ -67,6 +64,7 @@ export default {
         })
     },
     getTokenFromLocalStorage() {
+        // Store token in variable
         const token = localStorage.getItem("CasinoToken")
 
         let body = {

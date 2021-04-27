@@ -60,6 +60,8 @@ module.exports = {
     // checkback
     isLoggedIn: function(req, res) {
       let {email, password} = req.body
+
+      // Compare password with mongoDB
       db.Player.findOne({email}).then((player) => {
         bcrypt.compare(password, player.password, function(err, result) {
           if(result) {
@@ -71,6 +73,7 @@ module.exports = {
           }
         })
       })
+      .catch(err => res.send({ message: "Email Not Registered" }))
     },
     // verify token
     verifyCurrentToken: function(req, res) {

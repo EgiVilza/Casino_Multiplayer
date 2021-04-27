@@ -42,17 +42,13 @@ function Login() {
         // When logged in, redirect to game page
         API.login(data)
             .then(results => {
-
-                if (results.message === "Logged In") {
-                    setMessage(results.message + ": Redirecting to game page...")
-                } else {
-                    setMessage(results.message)
-                }
                 
+                // Display login/err messages
+                setMessage(results.message)
                 setClasses(results.alert)
 
                 setTimeout(() => {
-                    if (results.message === "Logged In") {
+                    if (results.message === "Logged In: Redirecting to game page...") {
                         dispatch({
                             type: 'isLoggedIn',
                             payload: ""
