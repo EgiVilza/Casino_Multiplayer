@@ -97,7 +97,7 @@ if(typeof state.gameState !== 'undefined'){
         state.socket.emit('stand', {});
 
         // Disable/Enable buttons
-        setDisableHitStay("disabled")
+        //setDisableHitStay("disabled")
       }
     
     function joinGame(e) {
@@ -128,9 +128,9 @@ if(typeof state.gameState !== 'undefined'){
         state.socket.emit('bet', betAmount);
 
         // Disable/Enable buttons
-        setDisablePlaceBet("disabled")
-        setDisableHitStay("")
-        setDisableSubmitScore("disabled")
+        // setDisablePlaceBet("disabled")
+        // setDisableHitStay("")
+        // setDisableSubmitScore("disabled")
       }
     }
 
