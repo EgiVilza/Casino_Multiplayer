@@ -3,8 +3,11 @@ import "./style.css"
 import SignUpBtn from "../SignUpBtn" 
 import { Link, Redirect } from "react-router-dom";
 import API from "../../utils/API"
+import {useAppContext} from '../../utils/AppContext'
 
 function Signup() {
+
+    const [state, dispatch] = useAppContext();
 
     const usernameRef = useRef("")
     const emailRef = useRef("")
@@ -43,10 +46,15 @@ function Signup() {
         }
 
         // Store email, password, and username in an object
-        var data = {
+        let data = {
             email: emailRef.current.value, 
             password: passwordRef.current.value,
             username: usernameRef.current.value
+        }
+
+        let loginData = {
+            email: emailRef.current.value, 
+            password: passwordRef.current.value
         }
 
         // Attempt to sign up an account a recieve an alert message
@@ -54,7 +62,8 @@ function Signup() {
         API.signup(data)
             .then(results => {
                 if (results.message === "Account Created") {
-                    setMessage(results.message + ": Redirecting to login page...")
+                    setMessage(results.message + ": Redirecting to game page...")
+                    LoginToGame(loginData)
                 } else {
                     setMessage(results.message)
                 }
@@ -62,17 +71,33 @@ function Signup() {
 
                 setTimeout(() => {
                     if (results.message === "Account Created") {
+
+                        // Display game links and hide signup/login links
+                        dispatch({
+                            type: 'isLoggedIn',
+                            payload: ""
+                        })
+                        dispatch({
+                            type: 'isLoggedOut',
+                            payload: "hidden"
+                        })
+
                         setIsVerified(true)
                     }
                   }, 3000);
             })
             .catch(err => console.log(err));
     }
+
+    const LoginToGame = (data) => {
+        API.login(data)
+            .catch(err => setMessage(err));
+    }
         
 
     return(
         <div className="signupWrapper">
-            {isVerified ? <Redirect to="/login" /> : ""}
+            {isVerified ? <Redirect to="/game" /> : ""}
             {/* change to props later amigo */}
             <h1 className="signup">Signup For Free</h1>
 
