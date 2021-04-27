@@ -47,3 +47,7 @@
 .innerDiv > button {
     padding: 1em;
 }
+
+.disabled {
+    pointer-events: none;
+}

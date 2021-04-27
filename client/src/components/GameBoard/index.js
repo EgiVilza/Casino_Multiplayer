@@ -16,6 +16,13 @@ function GameBoard() {
 
     const [state, dispatch] = useAppContext()
 
+    // Disable button states
+    const [disableJoinGame, setDisableJoinGame] = useState("")
+    const [disablePlaceBet, setDisablePlaceBet] = useState("disabled")
+    const [disableHitStay, setDisableHitStay] = useState("disabled")
+    const [disableSplit, setDisableSplit] = useState("disabled")
+    const [disableSubmitScore, setDisableSubmitScore] = useState("disabled")
+
 //Grabs the player object assosciated with the socket ID and names it as variable "asyncCurrentPlayer" for easier access
 
 let asyncCurrentPlayer = {}
@@ -64,13 +71,6 @@ if(typeof state.gameState !== 'undefined'){
         dispatch({type: 'gameState', gameState: data})
     })
 
-    // Disable button states
-    const [disableJoinGame, setDisableJoinGame] = useState("")
-    const [disablePlaceBet, setDisablePlaceBet] = useState("disabled")
-    const [disableHitStay, setDisableHitStay] = useState("disabled")
-    const [disableSplit, setDisableSplit] = useState("disabled")
-    const [disableSubmitScore, setDisableSubmitScore] = useState("disabled")
-
 //Button functions
     function playerHit(e) {
         e.preventDefault();
@@ -97,9 +97,7 @@ if(typeof state.gameState !== 'undefined'){
         state.socket.emit('stand', {});
 
         // Disable/Enable buttons
-        // setDisableHitStay("disabled")
-        setDisableSubmitScore("")
-        setDisablePlaceBet("")
+        setDisableHitStay("disabled")
       }
     
     function joinGame(e) {
@@ -130,8 +128,9 @@ if(typeof state.gameState !== 'undefined'){
         state.socket.emit('bet', betAmount);
 
         // Disable/Enable buttons
-        // setDisablePlaceBet("disabled")
+        setDisablePlaceBet("disabled")
         setDisableHitStay("")
+        setDisableSubmitScore("disabled")
       }
     }
 
@@ -145,35 +144,34 @@ console.log(asyncOtherPlayers)
                 
                 <div className="amount">Amount Left: {asyncPlayerBank}</div>
 
-                <Button className={"joinGame btn btn-success " + disableJoinGame}
+                <Button className={"joinGame btn-success " + disableJoinGame}
                         onClick={joinGame}>
                         Join Game
                 </Button>
 
-                <Button className={"placeBet btn btn-primary " + disablePlaceBet}
+                <Button className={"placeBet btn-primary " + disablePlaceBet}
                         onClick={playerBet}>
                         Place Bet
                 </Button>
 
                 <div className="innerDiv">
-                    <Button className={"hit btn btn-danger " + disableHitStay}
+                    <Button className={"hit btn-danger " + disableHitStay}
                         onClick={playerHit}>
                         Hit
                     </Button>
 
-                    <Button className={"stay btn btn-danger " + disableHitStay}
+                    <Button className={"stay btn-danger " + disableHitStay}
                         onClick={playerStay}>
                         Stay
                     </Button>
-
                 </div>
 
-                <Button className={"split btn btn-danger " + disableSplit}
+                <Button className={"split btn-danger " + disableSplit}
                     onClick={handleClick}>
                     Split
                 </Button>
 
-                <Button className={"subScore btn btn-warning " + disableSubmitScore}
+                <Button className={"subScore btn-warning " + disableSubmitScore}
                     onClick={handleClick}>
                     Submit Score
                 </Button>

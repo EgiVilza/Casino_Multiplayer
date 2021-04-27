@@ -1,0 +1,19 @@
+.viewRules {
+    margin: 4em;
+    border-style: solid;
+    border-color: black;
+    background-color: white;
+    padding: 2em;
+    text-align: left;
+    opacity: 0.90;
+    position: relative;
+    z-index: -1;
+}
+h1 {
+    font-family: 'Rouge Script', cursive;
+    color: black;
+    text-align: center;
+}
+p {
+    color: red
+}

@@ -42,7 +42,7 @@ const RightNav = ({ open }) => {
             .then(results => {
                 const message = results.data.message
 
-                // If not logged in, blackjack and viewgame links
+                // If not logged in, hide blackjack and viewgame links
                 // Else hide the signup and login links 
                 if (message !== "Token Verified") {
                   dispatch({
@@ -84,7 +84,8 @@ const RightNav = ({ open }) => {
       payload: ""
     })
 
-    // state.socket.emit("disconnect")
+    // Disconnect from the game
+    state.socket.disconnect()
   }
 
   return (
@@ -105,9 +106,9 @@ const RightNav = ({ open }) => {
         </li>
         <li className={state.isLoggedIn}>
             <Link 
-            to="/viewgame"          
+            to="/viewrules"          
             >
-              View Game
+              View Rules
              </Link>
         </li>
         <li>
