@@ -66,18 +66,18 @@ if(typeof state.gameState !== 'undefined'){
 
     // Disable button states
     const [disableJoinGame, setDisableJoinGame] = useState("")
-    const [disablePlaceBet, setDisablePlaceBet] = useState("")
-    const [disableHitStay, setDisableHitStay] = useState("")
-    const [disableSplit, setDisableSplit] = useState("")
-    const [disableSubmitScore, setDisableSubmitScore] = useState("")
+    const [disablePlaceBet, setDisablePlaceBet] = useState("disabled")
+    const [disableHitStay, setDisableHitStay] = useState("disabled")
+    const [disableSplit, setDisableSplit] = useState("disabled")
+    const [disableSubmitScore, setDisableSubmitScore] = useState("disabled")
 
 //Button functions
     function playerHit(e) {
         e.preventDefault();
 
-        // if (disableHitStay === "disabled") {
-        //     return
-        // }
+        if (disableHitStay === "disabled") {
+            return
+        }
 
         state.socket.emit('drawCard', {});
 
@@ -89,38 +89,48 @@ if(typeof state.gameState !== 'undefined'){
 
     function playerStay(e) {
         e.preventDefault();
+
+        if (disableHitStay === "disabled") {
+            return
+        }
+
         state.socket.emit('stand', {});
 
         // Disable/Enable buttons
         // setDisableHitStay("disabled")
-        // setDisableSubmitScore("")
-        // setDisablePlaceBet("")
+        setDisableSubmitScore("")
+        setDisablePlaceBet("")
       }
     
     function joinGame(e) {
         e.preventDefault();
+
+        if (disableJoinGame === "disabled") {
+            return
+        }
+
         const username = localStorage.getItem("CasinoUsername")
         state.socket.emit('joinGame', {username});
         dispatch({type: 'joinedGame', joinedGame: true})
 
         // Disable/Enable buttons
-        // setDisableJoinGame("disabled")
-        // setDisablePlaceBet("")
+        setDisableJoinGame("disabled")
+        setDisablePlaceBet("")
       }
 
     function playerBet(e) {
         e.preventDefault();
 
-        // if (disablePlaceBet === "disabled") {
-        //     return
-        // }
+        if (disablePlaceBet === "disabled") {
+            return
+        }
 
         let betAmount = prompt('How much would you like to bet?')
         if(betAmount < asyncPlayerBank){
         state.socket.emit('bet', betAmount);
 
         // Disable/Enable buttons
-        setDisablePlaceBet("disabled")
+        // setDisablePlaceBet("disabled")
         setDisableHitStay("")
       }
     }

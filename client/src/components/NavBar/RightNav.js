@@ -83,6 +83,8 @@ const RightNav = ({ open }) => {
       type: "isLoggedOut",
       payload: ""
     })
+
+    
   }
 
   return (

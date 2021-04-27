@@ -21,6 +21,7 @@ function GameBoardPage() {
         // To login page
         API.verifyToken(API.getTokenFromLocalStorage())
             .then(results => {
+                console.log(results)
                 const message = results.data.message
 
                 if (message !== "Token Verified") {
