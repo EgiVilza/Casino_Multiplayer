@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import "./app.css"
 import CreateServerPage from "./pages/CreateServerPage"
-import ViewGamePage from "./pages/ViewGamePage"
+import ViewRulesPage from "./pages/ViewRulesPage"
 import LeaderBoardPage from "./pages/LeaderBoardPage"
 import GameBoardPage from "./pages/GameBoardPage"
 import NavBar from "./components/NavBar"
@@ -46,7 +46,7 @@ function App() {
                     <Route export path="/homepage" component={HomePage} />
                     <Route export path="/server" component={CreateServerPage} />
                     <Route exact path="/game" component={GameBoardPage} />
-                    <Route export path="/viewgame" component={ViewGamePage} />
+                    <Route export path="/viewrules" component={ViewRulesPage} />
                     <Route exact path="/leaderboard" component={LeaderBoardPage} />
                     <Route exact path="/signup" component={SignupPage} />
                     <Route exact path="/login" component={LoginPage} />

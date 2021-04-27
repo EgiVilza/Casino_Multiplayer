@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react"
 import "./style.css"
-import Board from "../../components/ViewGame/Board"
+//import Board from "../../components/ViewGame/Board"
+import ViewRules from "../../components/ViewRules"
 import { useAppContext } from "../../utils/AppContext"
 import API from "../../utils/API"
 import { Redirect } from "react-router-dom"
 
-function ViewGamePage() {
+function ViewRulesPage() {
     const [ state, dispatch ] = useAppContext()
 
     const [isVerified, setIsVerified] = useState(true)
@@ -14,7 +15,7 @@ function ViewGamePage() {
     useEffect(() => {
         dispatch({
             type: "changeTitle",
-            title: "View Game"
+            title: "View Rules"
         })
 
         // Verifys token, if token is not verified, the user will be directed
@@ -41,9 +42,9 @@ function ViewGamePage() {
     return(
         // render components 
         <div id="gameWrapper">
-            {!isVerified ? <Redirect to="/login" /> : <Board />}
+            {!isVerified ? <Redirect to="/login" /> : <ViewRules />}
         </div>
     )
 }
 
-export default ViewGamePage
+export default ViewRulesPage
