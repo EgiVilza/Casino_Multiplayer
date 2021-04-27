@@ -18,10 +18,10 @@ function GameBoard() {
 
     // Disable button states
     const [disableJoinGame, setDisableJoinGame] = useState("")
-    const [disablePlaceBet, setDisablePlaceBet] = useState("disabled")
-    const [disableHitStay, setDisableHitStay] = useState("disabled")
-    const [disableSplit, setDisableSplit] = useState("disabled")
-    const [disableSubmitScore, setDisableSubmitScore] = useState("disabled")
+    const [disablePlaceBet, setDisablePlaceBet] = useState("")
+    const [disableHitStay, setDisableHitStay] = useState("")
+    const [disableSplit, setDisableSplit] = useState("")
+    const [disableSubmitScore, setDisableSubmitScore] = useState("")
 
 //Grabs the player object assosciated with the socket ID and names it as variable "asyncCurrentPlayer" for easier access
 
@@ -112,8 +112,8 @@ if(typeof state.gameState !== 'undefined'){
         dispatch({type: 'joinedGame', joinedGame: true})
 
         // Disable/Enable buttons
-        setDisableJoinGame("disabled")
-        setDisablePlaceBet("")
+        //setDisableJoinGame("disabled")
+        //setDisablePlaceBet("")
       }
 
     function playerBet(e) {
