@@ -10,7 +10,7 @@ Play a multiplayer game of BlackJack against the house with your and your friend
 
 * [Installation](#installation)
 
-* [Video](#video)
+* [Heroku Link](#herokulink)
 
 * [Built With](#builtwith)
 
@@ -28,9 +28,9 @@ To install necessary dependencies, run the following command:
 npm i
 ''
 
-## Video
+## Heroku Link
 
-Heorku Link: https://casino-multiplayer.herokuapp.com/
+Heroku Link: https://casino-multiplayer.herokuapp.com/
 
 ## Built With
 
