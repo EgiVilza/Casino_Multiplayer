@@ -21,7 +21,7 @@ function GameBoard() {
     const [disableSubmitScore, setDisableSubmitScore] = useState("disabled")
 
     if (state.socket.id === undefined) {
-        window.location.reload()
+        // window.location.reload()
     }
 
 //Grabs the player object assosciated with the socket ID and names it as variable "asyncCurrentPlayer" for easier access
