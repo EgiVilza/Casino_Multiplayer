@@ -1,8 +1,7 @@
-import React, {useState} from "react"
+import React, {useState, useReducer, useEffect} from "react"
 import "./style.css"
 import Button from "../Button"
 import { useAppContext } from '../../utils/AppContext'
-
 
 //Button Functions
 function handleClick(e) {
@@ -10,18 +9,20 @@ function handleClick(e) {
     console.log('The link was clicked.');
 }
 
-
-
 function GameBoard() {
 
     const [state, dispatch] = useAppContext()
 
     // Disable button states
     const [disableJoinGame, setDisableJoinGame] = useState("")
-    const [disablePlaceBet, setDisablePlaceBet] = useState("")
-    const [disableHitStay, setDisableHitStay] = useState("")
-    const [disableSplit, setDisableSplit] = useState("")
-    const [disableSubmitScore, setDisableSubmitScore] = useState("")
+    const [disablePlaceBet, setDisablePlaceBet] = useState("disabled")
+    const [disableHitStay, setDisableHitStay] = useState("disabled")
+    const [disableSplit, setDisableSplit] = useState("disabled")
+    const [disableSubmitScore, setDisableSubmitScore] = useState("disabled")
+
+    if (state.socket.id === undefined) {
+        window.location.reload()
+    }
 
 //Grabs the player object assosciated with the socket ID and names it as variable "asyncCurrentPlayer" for easier access
 
@@ -30,17 +31,19 @@ if(typeof state.gameState !== 'undefined'){
     asyncCurrentPlayer = state.gameState.players.find(({id}) => id === state.socket.id)
     }
 
-
+// Check this
 let asyncOtherPlayers = []
 if(typeof state.gameState !== 'undefined'){
     asyncOtherPlayers = state.gameState.players.filter(player => player.id !== state.socket.id)
 }
 
 //Renders dealer and player hands and score as empty to avoid mapping over undefined data
+const [, forceUpdate] = useReducer(x => x + 1, 0);
 
 let asyncPlayerArray = []
 if(typeof state.gameState !== 'undefined'){
-asyncCurrentPlayer.hand.forEach(element => asyncPlayerArray.push(element.image))
+    asyncCurrentPlayer.hand.forEach(element => asyncPlayerArray.push(element.image))
+
 }
 
 let asyncDealerArray = []
@@ -68,7 +71,21 @@ if(typeof state.gameState !== 'undefined'){
 //Socket listeners
 
     state.socket.on('gameStateUpdate', function(data){
+
         dispatch({type: 'gameState', gameState: data})
+
+        if (data.players[0].score >= 21) {
+            buttonChangeClasses()
+        } else if (data.dealer.score >= 21) {
+            buttonChangeClasses()
+        }
+        
+        function buttonChangeClasses() {
+            setDisableHitStay("disabled")
+            setDisablePlaceBet("")
+            setDisableSubmitScore("")
+        }
+        
     })
 
 //Button functions
@@ -80,11 +97,6 @@ if(typeof state.gameState !== 'undefined'){
         }
 
         state.socket.emit('drawCard', {});
-
-        // If round is over, enable place bet and submit score buttons
-        // and disable hit and stay buttons
-        // else do nothing
-
       }
 
     function playerStay(e) {
@@ -97,7 +109,7 @@ if(typeof state.gameState !== 'undefined'){
         state.socket.emit('stand', {});
 
         // Disable/Enable buttons
-        //setDisableHitStay("disabled")
+        setDisableHitStay("disabled")
       }
     
     function joinGame(e) {
@@ -112,8 +124,8 @@ if(typeof state.gameState !== 'undefined'){
         dispatch({type: 'joinedGame', joinedGame: true})
 
         // Disable/Enable buttons
-        //setDisableJoinGame("disabled")
-        //setDisablePlaceBet("")
+        setDisableJoinGame("disabled")
+        setDisablePlaceBet("")
       }
 
     function playerBet(e) {
@@ -128,9 +140,9 @@ if(typeof state.gameState !== 'undefined'){
         state.socket.emit('bet', betAmount);
 
         // Disable/Enable buttons
-        // setDisablePlaceBet("disabled")
-        // setDisableHitStay("")
-        // setDisableSubmitScore("disabled")
+        setDisablePlaceBet("disabled")
+        setDisableHitStay("")
+        setDisableSubmitScore("disabled")
       }
     }
 
