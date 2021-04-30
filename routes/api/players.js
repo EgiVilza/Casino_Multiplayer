@@ -12,6 +12,9 @@ router.route("/")
 
 router.route("/leaderboard")
     .get(playerController.findScores)
+    
+router.route("/balance")
+    .get(playerController.findBalance)
 
 router.route("/:id")
     .get(playerController.findById)

@@ -85,5 +85,13 @@ export default {
     },
     getPlayers() {
         return axios.get("http://localhost:8080/leaderboard") 
+      },
+    getBalance(data) {
+        return axios.get("http://localhost:8080/balance", {
+            params: {
+              username: data
+            }
+          }) 
       }
+
     }

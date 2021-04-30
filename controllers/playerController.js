@@ -21,6 +21,12 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err))
   }, 
+  findBalance: function(req, res) {
+    db.Player
+    .find({ username: req.query.username }, { balance: 1 })
+    .then(dbModel => res.json(dbModel))
+    .catch(err => res.status(422).json(err))
+}, 
     // create a player
     create: function(req, res) {
       let {email, username, password} = req.body
