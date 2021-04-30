@@ -20,6 +20,12 @@ function GameBoard() {
     const [disableSplit, setDisableSplit] = useState("disabled")
     const [disableSubmitScore, setDisableSubmitScore] = useState("disabled")
 
+    function buttonChangeClasses() {
+        setDisableHitStay("disabled")
+        setDisablePlaceBet("")
+        setDisableSubmitScore("")
+    }
+
     if (state.socket.id === undefined) {
         // window.location.reload()
     }
@@ -67,23 +73,15 @@ if(typeof state.gameState !== 'undefined'){
     asyncPlayerBank = asyncCurrentPlayer.bank
 }
 
-
 //Socket listeners
 
     state.socket.on('gameStateUpdate', function(data){
 
         dispatch({type: 'gameState', gameState: data})
+        console.log(data)
 
-        if (data.players[0].score >= 21) {
+        if (data.dealer.bust === true || data.dealer.stand === true || data.dealer.score >= 21) {
             buttonChangeClasses()
-        } else if (data.dealer.score >= 21) {
-            buttonChangeClasses()
-        }
-        
-        function buttonChangeClasses() {
-            setDisableHitStay("disabled")
-            setDisablePlaceBet("")
-            setDisableSubmitScore("")
         }
         
     })
@@ -140,7 +138,7 @@ if(typeof state.gameState !== 'undefined'){
         state.socket.emit('bet', betAmount);
 
         // Disable/Enable buttons
-        setDisablePlaceBet("disabled")
+        //setDisablePlaceBet("disabled")
         setDisableHitStay("")
         setDisableSubmitScore("disabled")
       }
@@ -193,26 +191,29 @@ console.log(asyncOtherPlayers)
             { <div className="secCol">
             
 
-                <div className="handOfDealer">Dealer's Hand: {asyncDealerArray.map((card) => (
+                <div className="handOfDealer">
+                    <p className="handTitle">Dealer's Hand:</p>
+                    <div className="dealerScoreCard">Dealer's Score: {asyncDealerScore}</div>
+                     {asyncDealerArray.map((card) => (
                     <img src={`/Images/CardFaces/${card}`} alt ={card} height='100px'></img>
                 ))}
                 
-                <div className="dealerScoreCard">Dealer's Score: {asyncDealerScore}
-                </div>
+               
 
                 </div>
                
 
-                <div className="handOfPlayer">Player's Hand: {asyncPlayerArray.map((card) => (
+                <div className="handOfPlayer"> 
+                    <p className="handTitle">Players's Hand:</p>
+                    <div className="playerScoreCard">Player's Score: {asyncPlayerScore >= 21 ? asyncPlayerScore : asyncPlayerScore}</div>
+                    {asyncPlayerArray.map((card) => (
                     <img src={`/Images/CardFaces/${card}`} alt ={card} height='100px'></img>
                 ))}
                 
-                <div className="playerScoreCard">Player's Score: {asyncPlayerScore}
                 
-                </div>
                 {asyncOtherPlayers.map((player) => <div>
 
-                    {player.name}'s Hand: 
+                    <p className="handTitle2">{player.name}'s Hand: </p>
                     {player.hand.map((card) =>(
                         <img src={`/Images/CardFaces/${card.image}`} alt ={card.image} height='100px'></img>))}
 

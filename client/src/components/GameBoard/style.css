@@ -35,7 +35,7 @@
 
 .secCol > div {
     border-style: solid;
-    text-align: center;
+    /* text-align: center; */
 }
 
 .innerDiv {
@@ -50,4 +50,19 @@
 
 .disabled {
     pointer-events: none;
+}
+
+.handOfDealer {
+    text-align: left;
+    justify-content: center;
+}
+
+.handTitle {
+    color: black;
+    text-align: center;
+}
+
+.handTitle2 {
+    color: black;
+    margin-top: 20px;
 }
