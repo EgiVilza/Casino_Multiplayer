@@ -2,6 +2,7 @@ import React, {useState, useReducer, useEffect} from "react"
 import "./style.css"
 import Button from "../Button"
 import { useAppContext } from '../../utils/AppContext'
+import API from "../../utils/API";
 
 //Button Functions
 function handleClick(e) {
@@ -144,6 +145,12 @@ if(typeof state.gameState !== 'undefined'){
       }
     }
 
+    function playerSubmit(e) {
+        e.preventDefault();
+        API.submitScore(asyncPlayerBank, asyncCurrentPlayer.name);
+        // Redirect to leaderboard
+    }
+
 console.log(asyncOtherPlayers)
 //Conditional rendering
 
@@ -182,7 +189,7 @@ console.log(asyncOtherPlayers)
                 </Button>
 
                 <Button className={"subScore btn-warning " + disableSubmitScore}
-                    onClick={handleClick}>
+                    onClick={playerSubmit}>
                     Submit Score
                 </Button>
 

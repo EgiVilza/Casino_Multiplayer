@@ -84,6 +84,14 @@ export default {
             }
           }) 
 
+      },
+    submitScore(score, id) {
+        return new Promise((resolve, reject) => {
+            axios.post(apiURL + "/submit/" + id, { score: score})
+            .then( response => {
+                resolve(response)
+            })
+            .catch(err => reject(err))
+        })
       }
-
     }

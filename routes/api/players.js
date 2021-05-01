@@ -16,6 +16,9 @@ router.route("/leaderboard")
 router.route("/balance")
     .get(playerController.findBalance)
 
+router.route("/submit/:id")
+    .post(playerController.submitScore)
+
 router.route("/:id")
     .get(playerController.findById)
     .put(playerController.update)
