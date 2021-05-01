@@ -235,7 +235,6 @@ io.on('connection', function(socket){
     })
 
     socket.on('loadUserBank', function(data){
-        console.log('Loading user bank', data)
         let currentPlayer = currentGameRound.players.find(({id}) => id === socket.id)
         currentPlayer.bank = data
         sendUpdatedGameStateToClients()
