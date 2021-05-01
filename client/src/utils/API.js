@@ -76,5 +76,22 @@ export default {
     },
     getPlayers() {
         return axios.get(apiURL + "/leaderboard") 
+      },
+    getBalance(data) {
+        return axios.get(apiURL + "/balance", {
+            params: {
+              username: data
+            }
+          }) 
+
+      },
+    submitScore(score, id) {
+        return new Promise((resolve, reject) => {
+            axios.post(apiURL + "/submit/" + id, { score: score})
+            .then( response => {
+                resolve(response)
+            })
+            .catch(err => reject(err))
+        })
       }
     }
