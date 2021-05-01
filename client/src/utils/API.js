@@ -76,5 +76,14 @@ export default {
     },
     getPlayers() {
         return axios.get(apiURL + "/leaderboard") 
+      },
+    getBalance(data) {
+        return axios.get(apiURL + "/balance", {
+            params: {
+              username: data
+            }
+          }) 
+
       }
+
     }

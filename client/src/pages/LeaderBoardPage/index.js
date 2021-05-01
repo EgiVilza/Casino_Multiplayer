@@ -20,11 +20,15 @@ function LeaderBoardPage() {
         
     // Get player data to show scores
     useEffect(() => {
+        API.getBalance("Pam")
+        .then(res => {
+            console.log(res.data);
+        })
+        .catch(err => console.log(err));
+
         API.getPlayers()
         .then(res => {
             setState({ players: res.data });
-            console.log(state.players);
-
         })
         .catch(err => console.log(err));
     }, [])
