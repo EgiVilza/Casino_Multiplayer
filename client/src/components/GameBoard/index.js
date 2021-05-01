@@ -2,6 +2,7 @@ import React, {useState, useReducer, useEffect} from "react"
 import "./style.css"
 import Button from "../Button"
 import { useAppContext } from '../../utils/AppContext'
+import API from "../../utils/API"
 
 //Button Functions
 function handleClick(e) {
@@ -11,8 +12,10 @@ function handleClick(e) {
 
 function GameBoard() {
 
+   
+    
     const [state, dispatch] = useAppContext()
-
+  
     // Disable button states
     const [disableJoinGame, setDisableJoinGame] = useState("")
     const [disablePlaceBet, setDisablePlaceBet] = useState("disabled")
@@ -112,7 +115,7 @@ if(typeof state.gameState !== 'undefined'){
     
     function joinGame(e) {
         e.preventDefault();
-
+       
         if (disableJoinGame === "disabled") {
             return
         }
@@ -120,7 +123,15 @@ if(typeof state.gameState !== 'undefined'){
         const username = localStorage.getItem("CasinoUsername")
         state.socket.emit('joinGame', {username});
         dispatch({type: 'joinedGame', joinedGame: true})
-
+        API.getPlayers().then(res => {
+            
+            let filteredUser = res.data.filter(user => user.username === username)
+            console.log(filteredUser)
+            state.socket.emit('loadUserBank', filteredUser[0].balance)
+        }
+        
+        )
+    
         // Disable/Enable buttons
         setDisableJoinGame("disabled")
         setDisablePlaceBet("")

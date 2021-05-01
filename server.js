@@ -222,12 +222,23 @@ io.on('connection', function(socket){
     //test
 
 
+
+    
 //test
     socket.on('bet', function(data){
         let currentPlayer = currentGameRound.players.find(({id}) => id === socket.id)
         currentPlayer.bet(parseInt(data))
        //sendUpdatedGameStateToClients()
         console.log(currentPlayer)
+    
+  
+    })
+
+    socket.on('loadUserBank', function(data){
+        console.log('Loading user bank', data)
+        let currentPlayer = currentGameRound.players.find(({id}) => id === socket.id)
+        currentPlayer.bank = data
+        sendUpdatedGameStateToClients()
     })
 
 })
