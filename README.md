@@ -2,23 +2,23 @@
 
 ## Description
 
-Play a game of BlackJack against the house. Start the game with 5000 in the bank, once the player is finished with playing the game, they have the option to add their name and score to the leaderboard after each round. If the player lost everything in the bank, bank is set back to the default amount.
+Play a multiplayer game of BlackJack against the house with your and your friends! To start, the user must make an account by signing up with their username, email, and password. After signing in, the user will be directed to the game page and will have the option to join the game. Once they have joined the game, they will be able to view other players who have also joined the game. When the user is finished playing the game, they will be able to submit their score on the leaderboard.
 
 # Table of Contents
 
+* [Screenshot](#screenshot)
+
 * [Installation](#installation)
 
-* [Video](#video)
+* [Heroku Link](#herokulink)
+
+* [Built With](#builtwith)
 
 * [License](#license)
 
-* [Contributing](contributing)
+## Screenshot
 
-* [Usage](#usage)
-
-* [Tests](#tests)
-
-* [Questions](#questions)
+![alt text](client/src/Images/CasinoMultiplayer.png)
 
 ## Installation
 
@@ -28,32 +28,30 @@ To install necessary dependencies, run the following command:
 npm i
 ''
 
-## Video
+## Heroku Link
 
-Video Link: https://drive.google.com/file/d/1gNp3-aFsfN4p1X5qIHFrtILm7UIg1F0k/view
+Heroku Link: https://casino-multiplayer.herokuapp.com/
+
+## Built With
+
+* CSS
+* JavaScript
+* Node.js
+* Bootstrap
+* React JS
+* NPM
+    * Node Express
+    * Socket.io
+    * MongoDB/Mongoose
+    * Jsonwebtoken
+    * axios
+    * bcrypt
+    * nodemon
+
+
 
 ## License
 
-This projects is licensed under the None license.
+This projects is licensed under the MIT license.
 
-## Contributing
-
-NA
-
-## Usage
-
-This repo is for a group coding project.
-
-## Tests
-
-To run tests, rund the following command:
-
-''
-NA
-''
-
-## Questions
-
-If you have any questions about the repo, open an issue or contact me at egivilza@email.com.
-You can find more of my work at: [egivilza](https://github.com/egivilza).
 

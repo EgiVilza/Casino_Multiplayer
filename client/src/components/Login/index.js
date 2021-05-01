@@ -2,15 +2,21 @@ import React, { useRef, useState } from "react"
 import "./style.css"
 import LoginBtn from "../LoginBtn" 
 import { Link, Redirect } from "react-router-dom";
-import API from "../../utils/API"
+import API from "../../utils/API";
+import {useAppContext} from '../../utils/AppContext'
 
 function Login() {
+
+    const [state, dispatch] = useAppContext();
 
     const emailRef = useRef("")
     const passwordRef = useRef("")
     
     const [message, setMessage] = useState("")
     const [classes, setClasses] = useState("")
+
+    // Check if token is verified
+    const [isVerified, setIsVerified] = useState(false)
 
     const onSubmit = (e) => {
         e.preventDefault()
@@ -36,19 +42,34 @@ function Login() {
         // When logged in, redirect to game page
         API.login(data)
             .then(results => {
+                
+                // Display login/err messages
                 setMessage(results.message)
                 setClasses(results.alert)
 
-                if (results.message === "Logged In") {
-                    //window.location = "/viewgame";
-                    <Redirect to="/viewgame" />
-                }
+                setTimeout(() => {
+                    if (results.message === "Logged In: Redirecting to game page...") {
+                        dispatch({
+                            type: 'isLoggedIn',
+                            payload: ""
+                        })
+                        dispatch({
+                            type: 'isLoggedOut',
+                            payload: "hidden"
+                        })
+                        setIsVerified(true)
+                    }
+                  }, 3000);
+
             })
-            .catch(err => console.log(err));
+            .catch(err => setMessage(err));
     }
 
     return(
         <div className="loginWrapper">
+            {/* If token is verified, then redirect to viewgame page */}
+            {isVerified ? <Redirect to="/game" /> : ""}
+
             {/* change to props later amigo */}
             <h1 className="signup">Login to Account</h1>
 
@@ -71,7 +92,7 @@ function Login() {
             </form>
 
             <p className={`message` + classes} role="alert">{message}</p>
-
+    
         </div>
     )
 }

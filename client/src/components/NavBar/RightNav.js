@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { Link } from "react-router-dom";
+import API from "../../utils/API"
+import {useAppContext} from '../../utils/AppContext'
 
 const Ul = styled.ul`
   list-style: none;
@@ -24,30 +26,89 @@ const Ul = styled.ul`
       color: #fff;
     }
   }
+  .hidden {
+    display: none;
+  }
 `;
 
 const RightNav = ({ open }) => {
+
+  const [state, dispatch] = useAppContext();
+
+  // If the user is not logged in, the game and viewgame links are hidden
+  // From the user
+  useEffect(() => {
+    API.verifyToken(API.getTokenFromLocalStorage())
+            .then(results => {
+                const message = results.data.message
+
+                // If not logged in, hide blackjack and viewgame links
+                // Else hide the signup and login links 
+                if (message !== "Token Verified") {
+                  dispatch({
+                    type: 'isLoggedIn',
+                    payload: "hidden"
+                  })
+                  dispatch({
+                    type: 'isLoggedOut',
+                    payload: ""
+                  })
+                } else {
+                  dispatch({
+                    type: 'isLoggedIn',
+                    payload: ""
+                  })
+                  dispatch({
+                    type: 'isLoggedOut',
+                    payload: "hidden"
+                  })
+                }
+            })
+            .catch(err => {
+              dispatch({type: 'isLoggedIn', payload:"hidden"})
+              dispatch({type: 'isLoggedOut', payload:""})
+            });
+  }, [])
+
+  function signout() {
+    // Reset Token
+    localStorage.setItem("CasinoToken","")
+
+    // Log out, hide game links and reveal signout/login links
+    dispatch({
+      type: "isLoggedIn",
+      payload: "hidden"
+    })
+    dispatch({
+      type: "isLoggedOut",
+      payload: ""
+    })
+
+    // Disconnect from the game
+    state.socket.disconnect()
+  }
+
   return (
     <Ul open={open}>
-        <li>
+        {/* <li className={classes}>
             <Link 
             to="/server"
             >
               Create Server
              </Link>
-        </li>
-        <li>
+        </li> */}
+        <li className={state.isLoggedIn}>
             <Link 
             to="/game"
             >
              Black Jack
              </Link>
         </li>
-        <li>
+        <li className={state.isLoggedIn}>
             <Link 
-            to="/viewgame"
+            to="/viewrules"          
             >
-              View Game
+              View Rules
              </Link>
         </li>
         <li>
@@ -57,18 +118,26 @@ const RightNav = ({ open }) => {
               Leader Board
              </Link>
         </li>
-        <li>
+        <li className={state.isLoggedOut}>
             <Link 
             to="/signup"
             >
               Sign Up
              </Link>
         </li>
-        <li>
+        <li className={state.isLoggedOut}>
             <Link 
             to="/login"
             >
               Login
+             </Link>
+        </li>
+        <li className={state.isLoggedIn}>
+            <Link 
+            to="/login"
+            onClick={signout}
+            >
+              Sign Out
              </Link>
         </li>
     </Ul>

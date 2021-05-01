@@ -45,7 +45,7 @@ function Navbar() {
           Home
         </Link>
       </div>
-      <h1 className="navTitle"> {state.title} </h1>
+      {/* <h1 className="navTitle"> {state.title} </h1> */}
       <Burger />
     </Nav>
   )
