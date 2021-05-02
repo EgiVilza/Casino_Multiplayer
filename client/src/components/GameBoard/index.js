@@ -29,10 +29,6 @@ function GameBoard() {
         setDisableSubmitScore("")
     }
 
-    if (state.socket.id === undefined) {
-        // window.location.reload()
-    }
-
 //Grabs the player object assosciated with the socket ID and names it as variable "asyncCurrentPlayer" for easier access
 
 let asyncCurrentPlayer = {}
@@ -195,7 +191,7 @@ console.log(asyncOtherPlayers)
 
                 <Button className={"split btn-danger " + disableSplit}
                     onClick={handleClick}>
-                    Split
+                    Split (Currently Disabled)
                 </Button>
 
                 <Button className={"subScore btn-warning " + disableSubmitScore}
