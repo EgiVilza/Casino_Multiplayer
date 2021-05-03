@@ -18,7 +18,6 @@ Play a multiplayer game of BlackJack against the house with your and your friend
 
 ## Screenshots
 
-![alt text](client/src/Images/CasinoMultiplayer.png)
 ![alt text](client/src/Images/CasinoSignupPage.png)
 ![alt text](client/src/Images/CasinoGamePage.png)
 
