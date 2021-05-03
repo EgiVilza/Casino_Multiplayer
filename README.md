@@ -6,7 +6,7 @@ Play a multiplayer game of BlackJack against the house with your and your friend
 
 # Table of Contents
 
-* [Screenshot](#screenshot)
+* [Screenshots](#screenshots)
 
 * [Installation](#installation)
 
@@ -16,9 +16,11 @@ Play a multiplayer game of BlackJack against the house with your and your friend
 
 * [License](#license)
 
-## Screenshot
+## Screenshots
 
 ![alt text](client/src/Images/CasinoMultiplayer.png)
+![alt text](client/src/Images/CasinoSignupPage.png)
+![alt text](client/src/Images/CasinoGamePage.png)
 
 ## Installation
 
