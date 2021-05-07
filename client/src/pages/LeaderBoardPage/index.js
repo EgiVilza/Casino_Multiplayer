@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 import "./style.css"
-import { useAppContext } from "../../utils/AppContext"
+//import { useAppContext } from "../../utils/AppContext"
 import Leaderboard from "../../components/Leaderboard"
 import API from "../../utils/API"
 

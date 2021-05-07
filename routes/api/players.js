@@ -32,7 +32,7 @@ router.route("/signup")
 router.route("/login")
     .post(playerController.isLoggedIn)
 
-router.route("/viewgame")
+router.route("/viewrules")
     .get(middleware.verifyToken, playerController.verifyCurrentToken)
     .post(middleware.verifyToken, playerController.verifyCurrentToken)
 

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect } from "react"
 import Login from "../../components/Login"
 import "./style.css"
@@ -11,6 +12,7 @@ const LoginPage = () => {
             type: "changeTitle",
             title: "Login"
         })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [] )
 
     return (

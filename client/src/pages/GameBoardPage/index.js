@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react"
 import "./style.css"
 import GameBoard from "../../components/GameBoard"
@@ -21,7 +22,6 @@ function GameBoardPage() {
         // To login page
         API.verifyToken(API.getTokenFromLocalStorage())
             .then(results => {
-                console.log(results)
                 const message = results.data.message
 
                 if (message !== "Token Verified") {
@@ -36,6 +36,7 @@ function GameBoardPage() {
                 setIsVerified(false)
             })
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return(

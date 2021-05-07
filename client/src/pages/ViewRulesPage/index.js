@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react"
 import "./style.css"
 //import Board from "../../components/ViewGame/Board"
@@ -36,6 +37,7 @@ function ViewRulesPage() {
                 setIsVerified(false)
             } );
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [] )
 
 

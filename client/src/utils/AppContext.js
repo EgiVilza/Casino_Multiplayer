@@ -67,7 +67,7 @@ const useAppContext = () => {
 const AppProvider = ({ value={}, ...props }) => {
   // calling useReducer always returns state and dispatch
   // passing in the reducer and the value from the AppProvider
-  console.log(value, "???")
+  //console.log(value, "???")
   const [state, dispatch] = useReducer(reducer, { ...value });
 
   // returning the provider

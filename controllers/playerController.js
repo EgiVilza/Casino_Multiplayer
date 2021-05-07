@@ -70,7 +70,6 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   // login to account and create a token
-  // checkback
   isLoggedIn: function (req, res) {
     let { email, password } = req.body
 
@@ -92,7 +91,7 @@ module.exports = {
   verifyCurrentToken: function (req, res) {
     jwt.verify(req.token, "casinokey", (err, authData) => {
       if (err) {
-        res.sendStatus(403)
+        res.send({ message: "404 Forbiden" })
       } else {
         res.send({ message: "Token Verified", authData })
       }
