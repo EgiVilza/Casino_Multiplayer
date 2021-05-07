@@ -68,11 +68,13 @@ const RightNav = ({ open }) => {
               dispatch({type: 'isLoggedIn', payload:"hidden"})
               dispatch({type: 'isLoggedOut', payload:""})
             });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   function signout() {
     // Reset Token
     localStorage.setItem("CasinoToken","")
+    localStorage.setItem("CasinoUsername", "")
 
     // Log out, hide game links and reveal signout/login links
     dispatch({
@@ -85,7 +87,7 @@ const RightNav = ({ open }) => {
     })
 
     // Disconnect from the game
-    state.socket.disconnect()
+    state.socket.emit('disconnected', {});
   }
 
   return (

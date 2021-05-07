@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect } from "react"
 import "./style.css"
 import CreateServerBtn from "../../components/CreateServerBtn"
@@ -13,6 +14,7 @@ function CreateServerPage() {
             type: "changeTitle",
             title: "Create Server"
         })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [] )
 
     return(

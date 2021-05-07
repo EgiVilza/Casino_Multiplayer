@@ -8,7 +8,14 @@
     position: relative;
     z-index: -1;
 }
+
 thead {
     font-family: 'Rouge Script', cursive;
     font-size: 55px;
 }
+
+@media only screen and (max-width: 900px) {
+    thead {
+        font-size: 25px;
+    }
+} 

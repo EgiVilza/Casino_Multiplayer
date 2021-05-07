@@ -25,13 +25,6 @@ if (process.env.NODE_ENV === "production") {
 app.use(cors())
 app.use(router)
 
-//Use sessions to keep track of the user's login status
-app.use(session({
-  secret: "Casino Multiplayer",
-  resave: false,
-  saveUninitialized: false
-}))
-
 // Connect to the Mongo DB
 mongoose
     .connect(process.env.MONGODB_URI || "mongodb://localhost/blackJackDB",
@@ -149,8 +142,10 @@ function sendUpdatedGameStateToClients(){
         players: currentGameRound.players,
         dealer: currentGameRound.dealer
     }
+
     currentGameRound.players.forEach(player => {
-        io.to(player.id).emit('gameStateUpdate', gameState)})
+        io.to(player.id).emit('gameStateUpdate', gameState)
+    })
 }
 
 
@@ -179,11 +174,13 @@ io.on('connection', function(socket){
     })
 
     
-    socket.on('disconnect', function(data){
+    socket.on('disconnected', function(data){
         let currentPlayer = currentGameRound.players.find(({id}) => id === socket.id)
-        if(typeof currentPlayer !== 'undefined' ){
-        currentGameRound.players = currentGameRound.players.filter(player => player.id !== currentPlayer.id)
-        sendUpdatedGameStateToClients()}
+        if(typeof currentPlayer !== 'undefined' )
+        {
+            currentGameRound.players = currentGameRound.players.filter(player => player.id !== currentPlayer.id)
+            sendUpdatedGameStateToClients()
+        }
     })
     
     //Listens for a card draw request from client
@@ -218,10 +215,6 @@ io.on('connection', function(socket){
         //Runs the dealer function
         runDealer()
     })
-
-    //test
-
-
 
     
 //test

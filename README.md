@@ -2,7 +2,7 @@
 
 ## Description
 
-Play a multiplayer game of BlackJack against the house with your and your friends! To start, the user must make an account by signing up with their username, email, and password. After signing in, the user will be directed to the game page and will have the option to join the game. Once they have joined the game, they will be able to view other players who have also joined the game. When the user is finished playing the game, they will be able to submit their score on the leaderboard.
+Play a multiplayer game of BlackJack against the house with you and your friends! To start, the user must make an account by signing up with their username, email, and password. After signing in, the user will be directed to the game page and will have the option to join. Once the user has joined the game, they will be able to view other players who are currently playing. When the user is finished playing, they will be able to submit their score on the leaderboard.
 
 # Table of Contents
 
@@ -10,9 +10,11 @@ Play a multiplayer game of BlackJack against the house with your and your friend
 
 * [Installation](#installation)
 
-* [Heroku Link](#herokulink)
+* [Heroku Link](#heroku-link)
 
-* [Built With](#builtwith)
+* [Video Link](#video-link)
+
+* [Built With](#built-with)
 
 * [License](#license)
 

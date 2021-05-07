@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useRef, useState }  from "react"
 import "./style.css"
 import SignUpBtn from "../SignUpBtn" 

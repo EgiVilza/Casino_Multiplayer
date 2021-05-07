@@ -19,17 +19,16 @@ const apiURL = process.env.NODE_ENV==="development" ? "http://localhost:8080" : 
 function App() {
     console.log(useAppContext())
 
-    console.log('hello')
     const [socket, setSocket] = useState(null)
     useEffect(() => 
     {
         var socketInEffect = io(apiURL)
-        console.log(socketInEffect)
+        //console.log(socketInEffect)
         socketInEffect.on('connect', () =>{
-            console.log(socketInEffect.id)
+        //console.log(socketInEffect.id)
 
-            console.log('Setting socket!')
-            setSocket(socketInEffect)
+        console.log('Setting socket!')
+        setSocket(socketInEffect)
 
     })
     socketInEffect.on('error', () => { console.log('erroring out')})
@@ -42,7 +41,7 @@ function App() {
                 {socket && (
                 <AppProvider value={{socket}}>
                 <NavBar />
-                    <Route exact path="/" component={LoginPage} />
+                    <Route exact path="/" component={HomePage} />
                     <Route export path="/homepage" component={HomePage} />
                     <Route export path="/server" component={CreateServerPage} />
                     <Route exact path="/game" component={GameBoardPage} />

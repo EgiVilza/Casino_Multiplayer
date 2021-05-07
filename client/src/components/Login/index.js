@@ -7,7 +7,8 @@ import {useAppContext} from '../../utils/AppContext'
 
 function Login() {
 
-    const [state, dispatch] = useAppContext();
+    // eslint-disable-next-line no-unused-vars
+    const [state , dispatch] = useAppContext();
 
     const emailRef = useRef("")
     const passwordRef = useRef("")

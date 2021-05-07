@@ -27,12 +27,6 @@ const playerSeed = [
     password: 125456,
     balance: 6000
   },
-  {
-    username: "Ren",
-    email: "ren@email.com",
-    password: 126456,
-    balance: 1000
-  },
 ];
 
 db.Player
